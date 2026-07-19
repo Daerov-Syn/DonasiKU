@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_beranda"
+        android:icon="@android:drawable/ic_menu_today"
+        android:title="Beranda" />
+    <item
+        android:id="@+id/nav_program_admin"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:title="Program" />
+    <item
+        android:id="@+id/nav_statistik"
+        android:icon="@android:drawable/ic_menu_report_image"
+        android:title="Statistik" />
+    <item
+        android:id="@+id/nav_donatur"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:title="Donatur" />
+</menu>

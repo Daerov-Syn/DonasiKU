@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/FirstFragment">
+
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.aplikasiprojeksmt4.ui.FirstFragment"
+        android:label="DonasiKu"
+        tools:layout="@layout/fragment_first">
+        <action
+            android:id="@+id/action_FirstFragment_to_WelcomeFragment"
+            app:destination="@id/WelcomeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/WelcomeFragment"
+        android:name="com.aplikasiprojeksmt4.ui.WelcomeFragment"
+        android:label="Welcome"
+        tools:layout="@layout/fragment_welcome">
+        <action
+            android:id="@+id/action_WelcomeFragment_to_LoginFragment"
+            app:destination="@id/LoginFragment" />
+        <action
+            android:id="@+id/action_WelcomeFragment_to_RegisterFragment"
+            app:destination="@id/RegisterFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/LoginFragment"
+        android:name="com.aplikasiprojeksmt4.ui.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_LoginFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_LoginFragment_to_RegisterFragment"
+            app:destination="@id/RegisterFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/RegisterFragment"
+        android:name="com.aplikasiprojeksmt4.ui.RegisterFragment"
+        android:label="Register"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_RegisterFragment_to_LoginFragment"
+            app:destination="@id/LoginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="com.aplikasiprojeksmt4.ui.SecondFragment"
+        android:label="Second Fragment"
+        tools:layout="@layout/fragment_second">
+        <action
+            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.aplikasiprojeksmt4.ui.HomeFragment"
+        android:label="Homepage"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_HomeFragment_to_NotifikasiPageFragment"
+            app:destination="@id/NotifikasiPageFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_DonasiUangFragment"
+            app:destination="@id/DonasiUangFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_DonasiBarangFragment"
+            app:destination="@id/DonasiBarangFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_ProgramPageFragment"
+            app:destination="@id/PageProgramFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_DetailProgramFragment"
+            app:destination="@id/DetailProgramDonasiUangFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/MapsFragment"
+        android:name="com.aplikasiprojeksmt4.ui.GMapFragment"
+        android:label="Peta"
+        tools:layout="@layout/fragment_gmap" >
+        <action
+            android:id="@+id/action_MapsFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/HistoryFragment"
+        android:name="com.aplikasiprojeksmt4.ui.HistoryFragment"
+        android:label="Riwayat"
+        tools:layout="@layout/fragment_history">
+        <action
+            android:id="@+id/action_HistoryFragment_to_DetailDonasiFragment"
+            app:destination="@id/DetailDonasiFragment" />
+        <action
+            android:id="@+id/action_HistoryFragment_to_HistoryUangFragment"
+            app:destination="@id/HistoryUangFragment" />
+        <action
+            android:id="@+id/action_HistoryFragment_to_HistoryBarangFragment"
+            app:destination="@id/HistoryBarangFragment" />
+        <action
+            android:id="@+id/action_HistoryFragment_to_HistoryProsesFragment"
+            app:destination="@id/HistoryProsesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/HistoryUangFragment"
+        android:name="com.aplikasiprojeksmt4.ui.HistoryUangFragment"
+        android:label="Riwayat Uang"
+        tools:layout="@layout/fragment_history_uang">
+        <action
+            android:id="@+id/action_HistoryUangFragment_to_HistoryFragment"
+            app:destination="@id/HistoryFragment"
+            app:popUpTo="@id/HistoryFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_HistoryUangFragment_to_HistoryBarangFragment"
+            app:destination="@id/HistoryBarangFragment" />
+        <action
+            android:id="@+id/action_HistoryUangFragment_to_HistoryProsesFragment"
+            app:destination="@id/HistoryProsesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/HistoryBarangFragment"
+        android:name="com.aplikasiprojeksmt4.ui.HistoryBarangFragment"
+        android:label="Riwayat Barang"
+        tools:layout="@layout/fragment_history_barang">
+        <action
+            android:id="@+id/action_HistoryBarangFragment_to_HistoryFragment"
+            app:destination="@id/HistoryFragment"
+            app:popUpTo="@id/HistoryFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_HistoryBarangFragment_to_HistoryUangFragment"
+            app:destination="@id/HistoryUangFragment" />
+        <action
+            android:id="@+id/action_HistoryBarangFragment_to_HistoryProsesFragment"
+            app:destination="@id/HistoryProsesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/HistoryProsesFragment"
+        android:name="com.aplikasiprojeksmt4.ui.HistoryProsesFragment"
+        android:label="Riwayat Proses"
+        tools:layout="@layout/fragment_history_proses">
+        <action
+            android:id="@+id/action_HistoryProsesFragment_to_HistoryFragment"
+            app:destination="@id/HistoryFragment"
+            app:popUpTo="@id/HistoryFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_HistoryProsesFragment_to_HistoryUangFragment"
+            app:destination="@id/HistoryUangFragment" />
+        <action
+            android:id="@+id/action_HistoryProsesFragment_to_HistoryBarangFragment"
+            app:destination="@id/HistoryBarangFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ProfileFragment"
+        android:name="com.aplikasiprojeksmt4.ui.ProfileFragment"
+        android:label="Profil"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_ProfileFragment_to_DataDiriFragment"
+            app:destination="@id/DataDiriFragment" />
+        <action
+            android:id="@+id/action_ProfileFragment_to_HistoryFragment"
+            app:destination="@id/HistoryFragment" />
+        <action
+            android:id="@+id/action_ProfileFragment_to_LaporanRealTimeFragment"
+            app:destination="@id/LaporanRealTimeFragment" />
+        <action
+            android:id="@+id/action_ProfileFragment_to_SertifDonasiFragment"
+            app:destination="@id/SertifDonasiFragment" />
+        <action
+            android:id="@+id/action_ProfileFragment_to_AdministratorFragment"
+            app:destination="@id/AdministratorFragment" />
+        <action
+            android:id="@+id/action_ProfileFragment_to_HomepageAdminFragment"
+            app:destination="@id/HomepageAdminFragment" />
+        <action
+            android:id="@+id/action_ProfileFragment_to_ManajemenProgramFragment"
+            app:destination="@id/ManajemenProgramFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/AdministratorFragment"
+        android:name="com.aplikasiprojeksmt4.ui.AdministratorFragment"
+        android:label="Administrator"
+        tools:layout="@layout/fragment_administrator">
+        <action
+            android:id="@+id/action_AdministratorFragment_to_TambahProgramFragment"
+            app:destination="@id/TambahProgramFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ManajemenProgramFragment"
+        android:name="com.aplikasiprojeksmt4.ui.ManajemenProgramFragment"
+        android:label="Manajemen Program"
+        tools:layout="@layout/fragment_manajemen_program">
+        <action
+            android:id="@+id/action_ManajemenProgramFragment_to_TambahProgramFragment"
+            app:destination="@id/TambahProgramFragment" />
+        <action
+            android:id="@+id/action_ManajemenProgramFragment_to_DetailDonasiMitraFragment"
+            app:destination="@id/DetailDonasiMitraFragment" />
+        <action
+            android:id="@+id/action_ManajemenProgramFragment_to_TarikDanaFragment"
+            app:destination="@id/TarikDanaFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/TambahProgramFragment"
+        android:name="com.aplikasiprojeksmt4.ui.TambahProgramFragment"
+        android:label="Tambah Program"
+        tools:layout="@layout/fragment_tambah_program" />
+
+    <fragment
+        android:id="@+id/DetailDonasiMitraFragment"
+        android:name="com.aplikasiprojeksmt4.ui.DetailDonasiMitraFragment"
+        android:label="Detail Donasi Mitra"
+        tools:layout="@layout/fragment_detail_donasi_mitra">
+        <argument
+            android:name="program"
+            app:argType="com.aplikasiprojeksmt4.models.Program" />
+        <action
+            android:id="@+id/action_DetailDonasiMitraFragment_to_EditProgramFragment"
+            app:destination="@id/EditProgramFragment" />
+        <action
+            android:id="@+id/action_DetailDonasiMitraFragment_to_TarikDanaFragment"
+            app:destination="@id/TarikDanaFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/EditProgramFragment"
+        android:name="com.aplikasiprojeksmt4.ui.EditProgramFragment"
+        android:label="Edit Program"
+        tools:layout="@layout/fragment_edit_program">
+        <argument
+            android:name="program"
+            app:argType="com.aplikasiprojeksmt4.models.Program" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/TarikDanaFragment"
+        android:name="com.aplikasiprojeksmt4.ui.TarikDanaFragment"
+        android:label="Tarik Dana"
+        tools:layout="@layout/fragment_tarik_dana">
+        <argument
+            android:name="program"
+            app:argType="com.aplikasiprojeksmt4.models.Program"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/DataDiriFragment"
+        android:name="com.aplikasiprojeksmt4.ui.DataDiriFragment"
+        android:label="Data Diri"
+        tools:layout="@layout/fragment_data_diri" />
+
+    <fragment
+        android:id="@+id/NotifikasiPageFragment"
+        android:name="com.aplikasiprojeksmt4.ui.NotifikasiPageFragment"
+        android:label="Notifikasi"
+        tools:layout="@layout/fragment_notifkasipage" />
+
+    <fragment
+        android:id="@+id/DonasiUangFragment"
+        android:name="com.aplikasiprojeksmt4.ui.DonasiUangFragment"
+        android:label="Donasi Uang"
+        tools:layout="@layout/fragment_donasiuang">
+        <action
+            android:id="@+id/action_DonasiUangFragment_to_DetailProgramDonasiUangFragment"
+            app:destination="@id/DetailProgramDonasiUangFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/DetailProgramDonasiUangFragment"
+        android:name="com.aplikasiprojeksmt4.ui.DetailProgramDonasiUangFragment"
+        android:label="Detail Program Donasi Uang"
+        tools:layout="@layout/fragment_detail_program_donasiuang">
+        <action
+            android:id="@+id/action_DetailProgramDonasiUangFragment_to_DonasiDanaFragment"
+            app:destination="@id/DonasiDanaFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/DonasiDanaFragment"
+        android:name="com.aplikasiprojeksmt4.ui.DonasiDanaFragment"
+        android:label="Pilih Nominal"
+        tools:layout="@layout/fragment_donasi_dana">
+        <action
+            android:id="@+id/action_DonasiDanaFragment_to_PilihBankFragment"
+            app:destination="@id/PilihBankFragment" />
+        <action
+            android:id="@+id/action_DonasiDanaFragment_to_PembayaranFragment"
+            app:destination="@id/PembayaranFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/PilihBankFragment"
+        android:name="com.aplikasiprojeksmt4.ui.PilihBankFragment"
+        android:label="Pilih Bank"
+        tools:layout="@layout/fragment_pilih_bank">
+        <action
+            android:id="@+id/action_PilihBankFragment_to_PembayaranFragment"
+            app:destination="@id/PembayaranFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/PembayaranFragment"
+        android:name="com.aplikasiprojeksmt4.ui.PembayaranFragment"
+        android:label="Pembayaran"
+        tools:layout="@layout/fragment_pembayaran">
+        <action
+            android:id="@+id/action_PembayaranFragment_to_StatusPembayaranFragment"
+            app:destination="@id/StatusPembayaranFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/StatusPembayaranFragment"
+        android:name="com.aplikasiprojeksmt4.ui.StatusPembayaranFragment"
+        android:label="Status Pembayaran"
+        tools:layout="@layout/fragment_status_pembayaran">
+        <action
+            android:id="@+id/action_StatusPembayaranFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_StatusPembayaranFragment_to_BuktiDonasiFragment"
+            app:destination="@id/BuktiDonasiFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/BuktiDonasiFragment"
+        android:name="com.aplikasiprojeksmt4.ui.BuktiDonasiFragment"
+        android:label="Bukti Donasi"
+        tools:layout="@layout/fragment_bukti_donasi">
+        <action
+            android:id="@+id/action_BuktiDonasiFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/DonasiBarangFragment"
+        android:name="com.aplikasiprojeksmt4.ui.DonasiBarangFragment"
+        android:label="Donasi Barang"
+        tools:layout="@layout/fragment_donasibarang">
+        <action
+            android:id="@+id/action_DonasiBarangFragment_to_DetailDonasiBarangFragment"
+            app:destination="@id/DetailDonasiBarangFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/DetailDonasiFragment"
+        android:name="com.aplikasiprojeksmt4.ui.DetailDonasiFragment"
+        android:label="Detail Donasi"
+        tools:layout="@layout/fragment_detaildonasi">
+        <action
+            android:id="@+id/action_DetailDonasiFragment_to_SertifDonasiFragment"
+            app:destination="@id/SertifDonasiFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/LaporanRealTimeFragment"
+        android:name="com.aplikasiprojeksmt4.ui.LaporanRealTimeFragment"
+        android:label="Laporan Real-Time"
+        tools:layout="@layout/fragment_laporanrealtime" />
+
+    <fragment
+        android:id="@+id/SertifDonasiFragment"
+        android:name="com.aplikasiprojeksmt4.ui.SertifDonasiFragment"
+        android:label="Sertifikat Donasi"
+        tools:layout="@layout/fragment_sertifdonasi" />
+
+    <fragment
+        android:id="@+id/HomepageAdminFragment"
+        android:name="com.aplikasiprojeksmt4.ui.HomepageAdminFragment"
+        android:label="Admin Homepage"
+        tools:layout="@layout/homepageadmin">
+        <action
+            android:id="@+id/action_HomepageAdminFragment_to_TambahProgramFragment"
+            app:destination="@id/TambahProgramFragment" />
+        <action
+            android:id="@+id/action_HomepageAdminFragment_to_VerifikasiAjuanProgramAdminFragment"
+            app:destination="@id/VerifikasiAjuanProgramAdminFragment" />
+        <action
+            android:id="@+id/action_HomepageAdminFragment_to_VerifikasiDonasiDanaFragment"
+            app:destination="@id/VerifikasiDonasiDanaFragment" />
+        <action
+            android:id="@+id/action_HomepageAdminFragment_to_VerifikasiDonasiBarangFragment"
+            app:destination="@id/VerifikasiDonasiBarangFragment" />
+        <action
+            android:id="@+id/action_HomepageAdminFragment_to_StatistikFragment"
+            app:destination="@id/StatistikFragment" />
+        <action
+            android:id="@+id/action_HomepageAdminFragment_to_PageProgramFragment"
+            app:destination="@id/PageProgramFragment" />
+        <action
+            android:id="@+id/action_HomepageAdminFragment_to_DonaturAdminFragment"
+            app:destination="@id/DonaturAdminFragment" />
+        <action
+            android:id="@+id/action_HomepageAdminFragment_to_ProfileAdminFragment"
+            app:destination="@id/ProfileAdminFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ProfileAdminFragment"
+        android:name="com.aplikasiprojeksmt4.ui.ProfileAdminFragment"
+        android:label="Profil Admin"
+        tools:layout="@layout/fragment_profile_admin" />
+
+    <fragment
+        android:id="@+id/PageProgramFragment"
+        android:name="com.aplikasiprojeksmt4.ui.PageProgramFragment"
+        android:label="Program"
+        tools:layout="@layout/page_program" >
+        <action
+            android:id="@+id/action_PageProgramFragment_to_HomepageAdminFragment"
+            app:destination="@id/HomepageAdminFragment" />
+        <action
+            android:id="@+id/action_PageProgramFragment_to_StatistikFragment"
+            app:destination="@id/StatistikFragment" />
+        <action
+            android:id="@+id/action_PageProgramFragment_to_DonaturAdminFragment"
+            app:destination="@id/DonaturAdminFragment" />
+        <action
+            android:id="@+id/action_PageProgramFragment_to_DetailDonasiMitraFragment"
+            app:destination="@id/DetailDonasiMitraFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/VerifikasiAjuanProgramAdminFragment"
+        android:name="com.aplikasiprojeksmt4.ui.VerifikasiAjuanProgramAdminFragment"
+        android:label="Verifikasi Ajuan Program"
+        tools:layout="@layout/page_verifikasi_ajuanprogram_admin" />
+
+    <fragment
+        android:id="@+id/VerifikasiDonasiDanaFragment"
+        android:name="com.aplikasiprojeksmt4.ui.VerifikasiDonasiDanaFragment"
+        android:label="Verifikasi Donasi Dana"
+        tools:layout="@layout/page_verifdonasidana" >
+        <action
+            android:id="@+id/action_VerifikasiDonasiDanaFragment_to_DetailDonasiFragment"
+            app:destination="@id/DetailDonasiFragment" />
+        <action
+            android:id="@+id/action_VerifikasiDonasiDanaFragment_to_VerifikasiTransferFragment"
+            app:destination="@id/VerifikasiTransferFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/VerifikasiTransferFragment"
+        android:name="com.aplikasiprojeksmt4.ui.VerifikasiTransferFragment"
+        android:label="Verifikasi Transfer"
+        tools:layout="@layout/fragment_verifikasi_transfer" />
+
+    <fragment
+        android:id="@+id/VerifikasiDonasiBarangFragment"
+        android:name="com.aplikasiprojeksmt4.ui.VerifikasiDonasiBarangFragment"
+        android:label="Verifikasi Donasi Barang"
+        tools:layout="@layout/page_verifdonasibarang" >
+        <action
+            android:id="@+id/action_VerifikasiDonasiBarangFragment_to_DetailDonasiBarangFragment"
+            app:destination="@id/DetailDonasiBarangFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/DetailDonasiBarangFragment"
+        android:name="com.aplikasiprojeksmt4.ui.DetailDonasiBarangFragment"
+        android:label="Detail Donasi Barang"
+        tools:layout="@layout/fragment_detail_donasi_barang">
+        <argument
+            android:name="programId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_DetailDonasiBarangFragment_to_FormDonasiBarangFragment"
+            app:destination="@id/FormDonasiBarangFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/FormDonasiBarangFragment"
+        android:name="com.aplikasiprojeksmt4.ui.FormDonasiBarangFragment"
+        android:label="Form Donasi Barang"
+        tools:layout="@layout/fragment_form_donasi_barang">
+        <argument
+            android:name="programId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_FormDonasiBarangFragment_to_DropPointFragment"
+            app:destination="@id/DropPointFragment" />
+        <action
+            android:id="@+id/action_FormDonasiBarangFragment_to_AlamatPenjemputanFragment"
+            app:destination="@id/AlamatPenjemputanFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/DropPointFragment"
+        android:name="com.aplikasiprojeksmt4.ui.DropPointFragment"
+        android:label="Drop Point"
+        tools:layout="@layout/fragment_drop_point">
+        <action
+            android:id="@+id/action_DropPointFragment_to_KonfirmasiDonasiBarangFragment"
+            app:destination="@id/KonfirmasiDonasiBarangFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/AlamatPenjemputanFragment"
+        android:name="com.aplikasiprojeksmt4.ui.AlamatPenjemputanFragment"
+        android:label="Alamat Penjemputan"
+        tools:layout="@layout/fragment_alamat_penjemputan">
+        <action
+            android:id="@+id/action_AlamatPenjemputanFragment_to_KonfirmasiDonasiBarangFragment"
+            app:destination="@id/KonfirmasiDonasiBarangFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/KonfirmasiDonasiBarangFragment"
+        android:name="com.aplikasiprojeksmt4.ui.KonfirmasiDonasiBarangFragment"
+        android:label="Konfirmasi Donasi"
+        tools:layout="@layout/fragment_konfirmasi_donasi_barang">
+        <action
+            android:id="@+id/action_KonfirmasiDonasiBarangFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/StatistikFragment"
+        android:name="com.aplikasiprojeksmt4.ui.StatistikFragment"
+        android:label="Statistik"
+        tools:layout="@layout/page_statistik" >
+        <action
+            android:id="@+id/action_StatistikFragment_to_HomepageAdminFragment"
+            app:destination="@id/HomepageAdminFragment" />
+        <action
+            android:id="@+id/action_StatistikFragment_to_PageProgramFragment"
+            app:destination="@id/PageProgramFragment" />
+        <action
+            android:id="@+id/action_StatistikFragment_to_DonaturAdminFragment"
+            app:destination="@id/DonaturAdminFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/DonaturAdminFragment"
+        android:name="com.aplikasiprojeksmt4.ui.DonaturAdminFragment"
+        android:label="Donatur"
+        tools:layout="@layout/donatur_admin">
+        <action
+            android:id="@+id/action_DonaturAdminFragment_to_HomepageAdminFragment"
+            app:destination="@id/HomepageAdminFragment" />
+        <action
+            android:id="@+id/action_DonaturAdminFragment_to_PageProgramFragment"
+            app:destination="@id/PageProgramFragment" />
+        <action
+            android:id="@+id/action_DonaturAdminFragment_to_StatistikFragment"
+            app:destination="@id/StatistikFragment" />
+        <action
+            android:id="@+id/action_DonaturAdminFragment_to_DetailDonaturAdminFragment"
+            app:destination="@id/DetailDonaturAdminFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/DetailDonaturAdminFragment"
+        android:name="com.aplikasiprojeksmt4.ui.DetailDonaturAdminFragment"
+        android:label="Detail Donatur"
+        tools:layout="@layout/detail_donatur_admin">
+        <action
+            android:id="@+id/action_DetailDonaturAdminFragment_to_DonaturAdminFragment"
+            app:destination="@id/DonaturAdminFragment" />
+    </fragment>
+
+</navigation>

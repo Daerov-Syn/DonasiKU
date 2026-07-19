@@ -1,0 +1,106 @@
+<resources>
+    <string name="app_name">DonasiKu</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">DonasiKu</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet
+    </string>
+
+    <string name="title_notifikasi">Notifikasi</string>
+    <string name="desc_back">Kembali</string>
+    <string name="notif_donasi_tersalurkan">Donasi Tersalurkan!</string>
+    <string name="notif_donasi_tersalurkan_desc">Bantuan dana pangan sebesar Rp 100.000 telah berhasil disalurkan</string>
+    <string name="notif_time_50m">50 menit lalu</string>
+    <string name="notif_penjemputan_dijadwalkan">Penjemputan Dijadwalkan</string>
+    <string name="notif_time_2h">2 jam lalu</string>
+    <string name="notif_kampanye_hampir_selesai">Kampanye Hampir Selesai</string>
+    <string name="notif_kampanye_desc">Bantuan dana pangan hampir mencapai target. 3 hari tersisa!</string>
+    <string name="notif_time_1d">1 hari lalu</string>
+    <string name="notif_laporan_mingguan">Laporan Mingguan</string>
+    <string name="notif_laporan_desc">Laporan distribusi minggu ini: 2 program donasi tersalur, 14 jiwa terbantu.</string>
+    <string name="notif_time_1w">1 minggu lalu</string>
+    <string name="notif_sertifikat_baru">Sertifikat Baru Tersedia</string>
+    <string name="notif_sertifikat_desc">Sertifikat donasi untuk program Donasi Pangan telah tersedia.</string>
+    <string name="notif_time_2w">2 minggu lalu</string>
+
+    <string name="title_riwayat_donasi">Riwayat Donasi</string>
+    <string name="tab_semua">Semua</string>
+    <string name="tab_uang">Uang</string>
+    <string name="tab_barang">Barang</string>
+    <string name="tab_proses">Proses</string>
+    <string name="stat_dana">Dana</string>
+    <string name="stat_paket">Paket</string>
+    <string name="stat_tersalur">Tersalur</string>
+
+    <string name="history_beasiswa">Beasiswa Anak Dhuafa</string>
+    <string name="history_medis">Bantuan Medis Daerah Kenjeran</string>
+    <string name="history_pangan">Bantuan Dana Pangan</string>
+    <string name="history_pakaian">Donasi Pakaian Layak</string>
+    <string name="history_sembako">Paket Sembako</string>
+    <string name="history_pendidikan">Bantuan Pendidikan Anak</string>
+    <string name="history_lansia">Sembako untuk Lansia</string>
+    <string name="history_ibadah">Renovasi Rumah Ibadah</string>
+    <string name="history_sarapan">Berbagi Sarapan</string>
+
+    <string name="status_diproses">Diproses</string>
+    <string name="status_tersalurkan">Tersalurkan</string>
+
+    <string name="title_detail_donasi">Detail Donasi</string>
+    <string name="label_jumlah_donasi">Jumlah Donasi</string>
+    <string name="label_detail_transaksi">Detail Transaksi</string>
+    <string name="label_id_transaksi">ID Transaksi</string>
+    <string name="label_metode_pembayaran">Metode Pembayaran</string>
+    <string name="label_tanggal_transaksi">Tanggal Transaksi</string>
+    <string name="label_penerima">Penerima</string>
+    <string name="label_status">Status</string>
+    <string name="label_bukti_penyaluran">Bukti Penyaluran</string>
+    <string name="label_foto_belum_tersedia">Foto Belum Tersedia</string>
+    <string name="btn_unduh_sertifikat">Unduh Sertifikat Donasi</string>
+
+    <string name="title_laporan_realtime">Laporan Real-Time</string>
+    <string name="report_last_update">Terakhir diperbarui: 1 hari yang lalu</string>
+    <string name="report_total_dana">Total Dana</string>
+    <string name="report_donasi_barang">Donasi Barang</string>
+    <string name="report_jiwa_terbantu">Jiwa Terbantu</string>
+    <string name="report_alokasi_distribusi">Alokasi Distribusi</string>
+    <string name="report_donasi_masuk">Donasi Masuk</string>
+    <string name="report_alokasi_kategori">Alokasi per Kategori Program</string>
+    <string name="report_sebaran_kategori">Sebaran Kategori</string>
+
+    <string name="cert_official">DonasiKu - Tersertifikasi Resmi</string>
+    <string name="cert_given_to">Diberikan kepada</string>
+    <string name="cert_contribution_label">Atas kontribusi donasi sebesar</string>
+    <string name="cert_for_program">untuk Bantuan Dana Pangan</string>
+    <string name="btn_download_pdf">Download PDF</string>
+    <string name="btn_back_home">Kembali ke Beranda</string>
+    <string name="halo_donatur">Halo Donatur 👋</string>
+    <string name="zulpa_apipah">Zulpa Apipah</string>
+    <string name="rp_300rb">Rp 300rb</string>
+
+    <!-- Additional values -->
+    <string name="val_3paket">3 Paket</string>
+    <string name="val_3">3</string>
+    <string name="val_rp_200k">Rp 200.000</string>
+    <string name="val_15box">15 Box</string>
+    <string name="val_rp_100k">Rp 100.000</string>
+    <string name="val_12pcs">12 Pcs</string>
+    <string name="val_rp_50k">Rp 50.000</string>
+    <string name="val_5paket">5 Paket</string>
+    <string name="val_rp_500k">Rp 500.000</string>
+    <string name="val_rp_25k">Rp 25.000</string>
+
+    <string name="date_11mar2026">11 Maret 2026</string>
+    <string name="date_9mar2026">9 Maret 2026</string>
+    <string name="date_29feb2026">29 Februari 2026</string>
+    <string name="date_3feb2026">3 Februari 2026</string>
+    <string name="date_15jan2026">15 Januari 2026</string>
+    <string name="date_10jan2026">10 Januari 2026</string>
+    <string name="date_5jan2026">5 Januari 2026</string>
+    <string name="date_1jan2026">1 Januari 2026</string>
+
+</resources>
