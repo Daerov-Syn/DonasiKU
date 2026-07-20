@@ -61,11 +61,11 @@ public class ManajemenProgramFragment extends Fragment {
             Navigation.findNavController(v).navigate(R.id.action_ManajemenProgramFragment_to_TarikDanaFragment)
         );
         
-        if (binding.btnBuatProgramMenu != null) {
-            binding.btnBuatProgramMenu.setOnClickListener(v -> 
-                Navigation.findNavController(v).navigate(R.id.action_ManajemenProgramFragment_to_TambahProgramFragment)
-            );
-        }
+        //if (binding.btnBuatProgramMenu != null) {
+            //binding.btnBuatProgramMenu.setOnClickListener(v ->
+                //Navigation.findNavController(v).navigate(R.id.action_ManajemenProgramFragment_to_TambahProgramFragment)
+            //);
+        //}
     }
 
     private void setupRecyclerView() {
@@ -103,7 +103,7 @@ public class ManajemenProgramFragment extends Fragment {
                         } else if (auth.getCurrentUser() != null && auth.getCurrentUser().getPhotoUrl() != null) {
                             loadProfileImage(auth.getCurrentUser().getPhotoUrl().toString());
                         } else {
-                            binding.ivProfileImage.setImageResource(R.drawable.logo);
+                            //binding.ivProfileImage.setImageResource(R.drawable.logo);
                         }
                     }
                 })
@@ -112,12 +112,12 @@ public class ManajemenProgramFragment extends Fragment {
 
     private void loadProfileImage(String url) {
         if (!isAdded()) return;
-        Glide.with(this)
-                .load(url)
-                .circleCrop()
-                .placeholder(R.drawable.logo)
-                .error(R.drawable.logo)
-                .into(binding.ivProfileImage);
+        //Glide.with(this)
+                //.load(url)
+                //.circleCrop()
+               // .placeholder(R.drawable.logo)
+                //.error(R.drawable.logo)
+                //.into(binding.ivProfileImage);
     }
 
     private void loadUserPrograms() {
