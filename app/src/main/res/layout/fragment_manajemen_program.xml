@@ -67,7 +67,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/rounded_icon_background"
-                    android:backgroundTint="#E6FFFFFF"
+                    android:backgroundTint="#C786D3"
                     android:gravity="center"
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="6dp"
@@ -278,7 +278,7 @@
                             app:autoSizeTextType="uniform"
                             app:autoSizeMinTextSize="8sp"
                             app:autoSizeMaxTextSize="11sp"
-                            app:drawableTopCompat="@android:drawable/ic_input_add"
+                            app:drawableTopCompat="@drawable/buat_program"
                             app:drawableTint="#9C27B0" />
                     </com.google.android.material.card.MaterialCardView>
 
@@ -307,7 +307,7 @@
                             app:autoSizeTextType="uniform"
                             app:autoSizeMinTextSize="8sp"
                             app:autoSizeMaxTextSize="11sp"
-                            app:drawableTopCompat="@android:drawable/ic_menu_agenda"
+                            app:drawableTopCompat="@drawable/tarik_dana"
                             app:drawableTint="#9C27B0" />
                     </com.google.android.material.card.MaterialCardView>
 
@@ -335,7 +335,7 @@
                             app:autoSizeTextType="uniform"
                             app:autoSizeMinTextSize="8sp"
                             app:autoSizeMaxTextSize="11sp"
-                            app:drawableTopCompat="@android:drawable/ic_menu_myplaces"
+                            app:drawableTopCompat="@drawable/donatur"
                             app:drawableTint="#9C27B0" />
                     </com.google.android.material.card.MaterialCardView>
 
@@ -363,7 +363,7 @@
                             app:autoSizeTextType="uniform"
                             app:autoSizeMinTextSize="8sp"
                             app:autoSizeMaxTextSize="11sp"
-                            app:drawableTopCompat="@android:drawable/ic_menu_sort_by_size"
+                            app:drawableTopCompat="@drawable/laporan"
                             app:drawableTint="#9C27B0" />
                     </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
@@ -400,7 +400,7 @@
                             android:layout_width="45dp"
                             android:layout_height="45dp"
                             android:layout_gravity="center"
-                            android:src="@android:drawable/ic_menu_agenda"
+                            android:src="@drawable/noprogram"
                             app:tint="#D4A1EC" />
                     </FrameLayout>
 
