@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F7FF"
+    android:orientation="vertical">
+
+    <!-- Header Ungu -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_gradasi_ungu"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="24dp">
+        <ImageButton
+            android:id="@+id/btn_back_faq"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_revert"
+            app:tint="#FFFFFF" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Bantuan &amp; FAQ"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Tombol Kontak -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+                <!-- Chat WhatsApp -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btn_wa"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@android:drawable/sym_action_chat"
+                            app:tint="#4CAF50" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Chat WhatsApp"
+                            android:textColor="#000000"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Resp. cepat"
+                            android:textColor="#888888"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Telepon CS -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btn_telepon"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@android:drawable/stat_sys_speakerphone"
+                            app:tint="#9C27B0" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Telepon CS"
+                            android:textColor="#000000"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="08:00 - 17:00"
+                            android:textColor="#888888"
+                            android:textSize="10sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="PERTANYAAN UMUM"
+                android:textColor="#9C27B0"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <!-- Card berisi Daftar FAQ -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp">
+
+                <!-- animateLayoutChanges="true" adalah kunci agar efek buka-tutupnya smooth! -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:animateLayoutChanges="true"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <!-- FAQ 1 -->
+                    <LinearLayout
+                        android:id="@+id/faq1_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:padding="12dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Berapa lama proses verifikasi program donasi?"
+                            android:textColor="#000000"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/faq1_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="▼"
+                            android:textColor="#9C27B0" />
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/faq1_answer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="12dp"
+                        android:paddingBottom="12dp"
+                        android:text="Proses verifikasi membutuhkan 1-24 jam kerja. Tim kami akan menghubungi Anda via WhatsApp jika ada informasi tambahan yang dibutuhkan."
+                        android:textColor="#666666"
+                        android:textSize="12sp"
+                        android:visibility="gone" /> <!-- Awalnya disembunyikan (gone) -->
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EEEEEE" />
+
+                    <!-- FAQ 2 -->
+                    <LinearLayout
+                        android:id="@+id/faq2_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:padding="12dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Kapan dana donasi bisa ditarik?"
+                            android:textColor="#000000"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/faq2_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="▼"
+                            android:textColor="#9C27B0" />
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/faq2_answer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="12dp"
+                        android:paddingBottom="12dp"
+                        android:text="Dana bisa ditarik setelah program mendapatkan minimal 10 donatur. Proses transfer membutuhkan 1-2 hari kerja setelah pengajuan."
+                        android:textColor="#666666"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EEEEEE" />
+
+                    <!-- FAQ 3 -->
+                    <LinearLayout
+                        android:id="@+id/faq3_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:padding="12dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Berapa biaya admin untuk mitra?"
+                            android:textColor="#000000"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/faq3_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="▼"
+                            android:textColor="#9C27B0" />
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/faq3_answer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="12dp"
+                        android:paddingBottom="12dp"
+                        android:text="Untuk mitra terverifikasi, biaya admin penarikan adalah 5%. Kami hanya memotong 2.5% dari setiap donasi masuk untuk biaya operasional platform."
+                        android:textColor="#666666"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EEEEEE" />
+
+                    <!-- FAQ 4 -->
+                    <LinearLayout
+                        android:id="@+id/faq4_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:padding="12dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Bagaimana cara meningkatkan level mitra?"
+                            android:textColor="#000000"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/faq4_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="▼"
+                            android:textColor="#9C27B0" />
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/faq4_answer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="12dp"
+                        android:paddingBottom="12dp"
+                        android:text="Level mitra ditentukan oleh jumlah program aktif dan total dana yang berhasil dikumpulkan. Hubungi tim kami untuk informasi lebih lanjut."
+                        android:textColor="#666666"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EEEEEE" />
+
+                    <!-- FAQ 5 -->
+                    <LinearLayout
+                        android:id="@+id/faq5_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:padding="12dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Apa yang terjadi jika program tidak mencapai target?"
+                            android:textColor="#000000"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/faq5_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="▼"
+                            android:textColor="#9C27B0" />
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/faq5_answer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="12dp"
+                        android:paddingBottom="12dp"
+                        android:text="Dana tetap bisa ditarik meskipun target tidak tercapai. Pastikan Anda memberikan laporan penggunaan dana kepada donatur."
+                        android:textColor="#666666"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

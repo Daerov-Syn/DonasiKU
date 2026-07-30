@@ -1,0 +1,18 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.AplikasiProjekSMT4" parent="Base.Theme.AplikasiProjekSMT4">
+        <!-- Transparent system bars for edge-to-edge. -->
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+    </style>
+
+    <!-- Style untuk Splash Screen (Starting Window) agar konsisten di API 23+ -->
+    <style name="Theme.App.Starting" parent="Theme.AplikasiProjekSMT4">
+        <!-- Untuk Android 12 ke atas (API 31+) -->
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="31">@drawable/logodonasiku</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="31">#FCF5F0</item>
+        <!-- Untuk versi di bawah Android 12 -->
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+</resources>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F7FF">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:background="#9C27B0">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBack"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                app:backgroundTint="#FFFFFF"
+                app:cornerRadius="20dp"
+                app:icon="@android:drawable/ic_menu_revert"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="20dp"
+                app:iconTint="#9C27B0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Donasi Dana"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+                app:layout_constraintStart_toEndOf="@+id/btnBack"
+                app:layout_constraintTop_toTopOf="@+id/btnBack" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Metode Pembayaran"
+                android:textColor="#E1BEE7"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/btnBack"
+                app:layout_constraintTop_toBottomOf="@+id/btnBack"
+                android:layout_marginTop="12dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PILIH BANK"
+                        android:textColor="#000000"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:id="@+id/rgBanks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp">
+
+                        <RadioButton
+                            android:id="@+id/rbBCA"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:text="Bank BCA"
+                            android:buttonTint="#9C27B0"
+                            android:paddingStart="12dp"/>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0"/>
+
+                        <RadioButton
+                            android:id="@+id/rbBNI"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:text="Bank BNI"
+                            android:buttonTint="#9C27B0"
+                            android:paddingStart="12dp"/>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0"/>
+
+                        <RadioButton
+                            android:id="@+id/rbBRI"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:text="Bank BRI"
+                            android:buttonTint="#9C27B0"
+                            android:paddingStart="12dp"/>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#F0F0F0"/>
+
+                        <RadioButton
+                            android:id="@+id/rbQRIS"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:text="QRIS (Gopay, OVO, Dana)"
+                            android:buttonTint="#9C27B0"
+                            android:paddingStart="12dp"/>
+                    </RadioGroup>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnConfirmBank"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="32dp"
+                android:text="Lanjutkan Pembayaran"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                app:backgroundTint="#9C27B0"
+                app:cornerRadius="16dp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

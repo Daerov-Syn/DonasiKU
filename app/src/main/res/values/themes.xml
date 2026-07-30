@@ -1,0 +1,39 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.AplikasiProjekSMT4" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">#9C27B0</item>
+        <item name="colorPrimaryVariant">#7B1FA2</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+    </style>
+
+    <style name="Theme.AplikasiProjekSMT4" parent="Base.Theme.AplikasiProjekSMT4" />
+
+    <!-- Style untuk Splash Screen (Starting Window) -->
+    <style name="Theme.App.Starting" parent="Theme.AplikasiProjekSMT4">
+        <!-- Untuk Android 12+ (API 31+) -->
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="31">@drawable/logodonasiku</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="31">#FCF5F0</item>
+
+        <!-- Untuk versi di bawah Android 12 -->
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="Theme.AplikasiProjekSMT4.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.AplikasiProjekSMT4.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- Shape Appearance for Circular Images -->
+    <style name="CircleImage" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- Shape Appearance for Bottom Card -->
+    <style name="ShapeAppearanceOverlay.MaterialComponents.BottomCard" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">24dp</item>
+        <item name="cornerSizeTopRight">24dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+</resources>

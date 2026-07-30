@@ -1,0 +1,15 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.AplikasiProjekSMT4" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">#9C27B0</item>
+    </style>
+
+    <style name="Theme.AplikasiProjekSMT4" parent="Base.Theme.AplikasiProjekSMT4" />
+
+    <!-- Style untuk Splash Screen (Starting Window) Mode Malam -->
+    <style name="Theme.App.Starting" parent="Theme.AplikasiProjekSMT4">
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="31">@drawable/logodonasiku</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="31">#FCF5F0</item>
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+</resources>

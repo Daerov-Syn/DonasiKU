@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_500">#9C27B0</color>
+    <color name="purple_700">#7B1FA2</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="bg_splash">#FCF5F0</color>
+
+    <color name="primary_purple">#8E24AA</color>
+    <color name="primary_purple_light">#E1BEE7</color>
+    <color name="secondary_purple">#BA68C8</color>
+    <color name="text_secondary">#757575</color>
+    <color name="card_bg">#FDFDFD</color>
+    <color name="status_bar_purple">#7B1FA2</color>
+    <color name="bg_light_gray">#F5F5F5</color>
+    <color name="orange_progress">#FF9800</color>
+    <color name="badge_red">#D32F2F</color>
+
+    <color name="white_translucent">#66FFFFFF</color>
+    <color name="light_gray">#EEEEEE</color>
+    <color name="text_gray">#888888</color>
+
+    <!-- Verification Page Colors -->
+    <color name="bg_warning">#FFF9C4</color>
+    <color name="text_warning">#F57F17</color>
+    <color name="bg_approve">#E8F5E9</color>
+    <color name="text_approve">#2E7D32</color>
+    <color name="bg_reject">#FFEBEE</color>
+    <color name="text_reject">#C62828</color>
+    <color name="bg_detail">#F3E5F5</color>
+    <color name="text_detail">#7B1FA2</color>
+    <color name="bg_tag_baru">#FFF3E0</color>
+    <color name="text_tag_baru">#EF6C00</color>
+</resources>

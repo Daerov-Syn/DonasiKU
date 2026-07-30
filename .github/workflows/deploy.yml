@@ -1,0 +1,40 @@
+name: Android CI/CD Auto-Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Build Debug APK
+      run: ./gradlew assembleDebug
+
+    - name: Get Version Name
+      id: get_version
+      run: |
+        VERSION_NAME=$(grep "versionName" app/build.gradle.kts | head -n 1 | awk -F'"' '{print $2}')
+        echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
+        echo "version=$VERSION_NAME" >> $GITHUB_OUTPUT
+
+    - name: Upload to Firebase Storage & Update Firestore
+      uses: w9jds/firebase-action@master
+      with:
+        args: |
+          storage:upload app/build/outputs/apk/debug/app-debug.apk --path /releases/app-debug.apk
+          firestore:set app_settings/update_info --data '{"latest_version": "${{ env.VERSION_NAME }}", "download_url": "https://firebasestorage.googleapis.com/v0/b/${{ secrets.FIREBASE_PROJECT_ID }}.appspot.com/o/releases%2Fapp-debug.apk?alt=media"}'
+      env:
+        GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}

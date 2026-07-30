@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F7FF"
+    tools:ignore="HardcodedText,ContentDescription,UseCompoundDrawables">
+
+    <!-- Header -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@drawable/bg_header_admin">
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="48dp"
+            android:background="@drawable/bg_circle_white"
+            android:src="@android:drawable/ic_menu_revert"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/primary_purple" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Donasi Dana"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_back"
+            app:layout_constraintStart_toEndOf="@+id/btn_back"
+            app:layout_constraintTop_toTopOf="@+id/btn_back" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Summary Cards -->
+    <LinearLayout
+        android:id="@+id/summary_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-40dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
+        android:weightSum="2"
+        app:layout_constraintTop_toBottomOf="@+id/header">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dana Sukses" android:textColor="#757575" android:textSize="12sp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="Rp 300rb" android:textColor="@color/primary_purple" android:textSize="20sp" android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Perlu Verifikasi" android:textColor="#757575" android:textSize="12sp" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="3" android:textColor="@color/primary_purple" android:textSize="20sp" android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+    <!-- Filter Tabs -->
+    <HorizontalScrollView
+        android:id="@+id/filter_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:paddingHorizontal="20dp"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@+id/summary_layout">
+        <!-- Tetap sama karena sudah menggunakan background warna yang dikunci -->
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal" android:paddingVertical="8dp">
+            <TextView android:id="@+id/filter_semua" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp" android:background="@drawable/bg_header_admin" android:paddingHorizontal="18dp" android:paddingVertical="8dp" android:text="Semua" android:textColor="#FFFFFF" android:textSize="13sp" android:textStyle="bold" />
+            <TextView android:id="@+id/filter_sukses" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp" android:background="@drawable/bg_card_white" android:paddingHorizontal="12dp" android:paddingVertical="8dp" android:text="Sukses" android:textColor="@color/primary_purple" android:textSize="13sp" />
+            <TextView android:id="@+id/filter_perlu_verifikasi" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="12dp" android:background="@drawable/bg_card_white" android:paddingHorizontal="12dp" android:paddingVertical="8dp" android:text="Perlu Verifikasi" android:textColor="@color/primary_purple" android:textSize="13sp" />
+            <TextView android:id="@+id/filter_gagal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_card_white" android:paddingHorizontal="12dp" android:paddingVertical="8dp" android:text="Gagal" android:textColor="@color/primary_purple" android:textSize="13sp" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Donation List -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filter_scroll">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="24dp">
+
+            <!-- Item 1 (Sukses) -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_donation_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
+                    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="TRX2302950100015" android:textColor="#BDBDBD" android:textSize="11sp" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="Rp 200.000" android:textColor="#000000" android:textSize="16sp" android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:gravity="center_vertical" android:orientation="horizontal">
+                        <com.google.android.material.card.MaterialCardView android:layout_width="44dp" android:layout_height="44dp" app:cardBackgroundColor="#E8F5E9" app:cardCornerRadius="22dp" app:cardElevation="0dp">
+                            <TextView android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center" android:text="ZA" android:textColor="@color/primary_purple" android:textStyle="bold" />
+                        </com.google.android.material.card.MaterialCardView>
+                        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Zulpa Apipah" android:textColor="#000000" android:textSize="15sp" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Beasiswa Anak Dhuafa" android:textColor="#757575" android:textSize="13sp" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Transfer BCA" android:textColor="#BDBDBD" android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Item 2 (Sukses) -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_donation_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
+                    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="TRX1302950100013" android:textColor="#BDBDBD" android:textSize="11sp" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="Rp 100.000" android:textColor="#000000" android:textSize="16sp" android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:gravity="center_vertical" android:orientation="horizontal">
+                        <com.google.android.material.card.MaterialCardView android:layout_width="44dp" android:layout_height="44dp" app:cardBackgroundColor="#E8F5E9" app:cardCornerRadius="22dp" app:cardElevation="0dp">
+                            <TextView android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center" android:text="ZA" android:textColor="@color/primary_purple" android:textStyle="bold" />
+                        </com.google.android.material.card.MaterialCardView>
+                        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Zulpa Apipah" android:textColor="#000000" android:textSize="15sp" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Bantuan Dana Pangan" android:textColor="#757575" android:textSize="13sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Item 3 (Verifikasi Transfer) -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_donation_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
+                    <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="TRX2026032700041" android:textColor="#BDBDBD" android:textSize="11sp" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="Rp 500.000" android:textColor="#000000" android:textSize="16sp" android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:gravity="center_vertical" android:orientation="horizontal">
+                        <com.google.android.material.card.MaterialCardView android:layout_width="44dp" android:layout_height="44dp" app:cardBackgroundColor="#FFF3E0" app:cardCornerRadius="22dp" app:cardElevation="0dp">
+                            <TextView android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center" android:text="FA" android:textColor="@color/primary_purple" android:textStyle="bold" />
+                        </com.google.android.material.card.MaterialCardView>
+                        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Findow Aja" android:textColor="#000000" android:textSize="15sp" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Bantuan Dana Pangan" android:textColor="#757575" android:textSize="13sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_verif_transfer_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:paddingHorizontal="24dp"
+                        android:text="Verifikasi Transfer"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF"
+                        app:backgroundTint="@color/primary_purple"
+                        app:cornerRadius="12dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

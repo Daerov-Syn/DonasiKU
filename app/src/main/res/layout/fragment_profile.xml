@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F7FF">
+
+    <!-- BACKGROUND GRADASI UNGU STATIS DI BELAKANG -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        android:background="@drawable/bg_gradasi_ungu" />
+
+    <!-- SCROLL VIEW MEMBUNGKUS KESELURUHAN LAYAR -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- ========================================== -->
+            <!-- 1. BAGIAN HEADER (FOTO & NAMA) DI ATAS     -->
+            <!-- ========================================== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="60dp"
+                android:paddingBottom="40dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvProfileImage"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:cardCornerRadius="50dp"
+                    app:cardElevation="8dp"
+                    app:strokeColor="#FFFFFF"
+                    app:strokeWidth="2dp">
+                    <ImageView
+                        android:id="@+id/ivProfilePicture"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/group_2" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/tvProfileName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="Zulpa Apipah"
+                    android:textColor="#FFFFFF"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvProfileEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="zulpaR@gmail.com"
+                    android:textColor="#EEEEEE"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:id="@+id/llBadges"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:text="♥ Donatur Aktif"
+                        android:textColor="#FFFFFF"
+                        android:textSize="10sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:text="★ Top 5%"
+                        android:textColor="#FFFFFF"
+                        android:textSize="10sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📦 Donatur Barang"
+                        android:textColor="#FFFFFF"
+                        android:textSize="10sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- ========================================== -->
+            <!-- 2. WADAH PUTIH MELENGKUNG (KONTEN BAWAH)   -->
+            <!-- ========================================== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rounded_top_white"
+                android:layout_marginTop="-20dp"
+                android:orientation="vertical"
+                android:paddingBottom="100dp">
+
+                <!-- KOTAK STATISTIK -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cvStats"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="20dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingVertical="20dp"
+                        android:weightSum="3">
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dana" android:textColor="#555555" android:textSize="12sp" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="Rp 300rb" android:textColor="#9C27B0" android:textSize="16sp" android:textStyle="bold" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Paket Barang" android:textColor="#555555" android:textSize="12sp" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="5" android:textColor="#9C27B0" android:textSize="16sp" android:textStyle="bold" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Terbantu" android:textColor="#555555" android:textSize="12sp" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="40" android:textColor="#9C27B0" android:textSize="16sp" android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- ================= SECTION 1: AKUN ================= -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="24dp"
+                    android:text="AKUN"
+                    android:textColor="#888888"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="12dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="2dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingVertical="12dp">
+
+                        <LinearLayout android:id="@+id/llDataDiri" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true" android:gravity="center_vertical" android:paddingHorizontal="20dp" android:paddingVertical="12dp">
+                            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/prof" app:tint="#555555" />
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Data Diri" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Kelola informasi akun Anda" android:textColor="#888888" android:textSize="11sp" />
+                            </LinearLayout>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textColor="#CCCCCC" android:textSize="16sp" />
+                        </LinearLayout>
+
+                        <LinearLayout android:id="@+id/llLaporanRealTime" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true" android:gravity="center_vertical" android:paddingHorizontal="20dp" android:paddingVertical="12dp">
+                            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/report" app:tint="#555555" />
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Laporan Real-Time" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Statistik dan transparansi donasi" android:textColor="#888888" android:textSize="11sp" />
+                            </LinearLayout>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textColor="#CCCCCC" android:textSize="16sp" />
+                        </LinearLayout>
+
+                        <!-- Menu Dinamis Mitra & Admin (Disesuaikan di Java) -->
+                        <View android:id="@+id/viewSeparatorDaftarMitra" android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginStart="60dp" android:background="#F0F0F0" android:visibility="gone"/>
+                        <LinearLayout android:id="@+id/llDaftarMitra" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true" android:gravity="center_vertical" android:paddingHorizontal="20dp" android:paddingVertical="12dp" android:visibility="gone">
+                            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@android:drawable/ic_menu_manage" app:tint="#555555" />
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Daftar mitra" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lihat mitra dan lokasi donasi barang" android:textColor="#888888" android:textSize="11sp" />
+                            </LinearLayout>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textColor="#CCCCCC" android:textSize="16sp" />
+                        </LinearLayout>
+
+                        <View android:id="@+id/viewSeparatorAdmin" android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginStart="60dp" android:background="#F0F0F0" android:visibility="gone"/>
+                        <LinearLayout android:id="@+id/llAdministrator" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true" android:gravity="center_vertical" android:paddingHorizontal="20dp" android:paddingVertical="12dp" android:visibility="gone">
+                            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@android:drawable/ic_menu_agenda" app:tint="#555555" />
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Administrator" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Kelola aplikasi dan donasi" android:textColor="#888888" android:textSize="11sp" />
+                            </LinearLayout>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textColor="#CCCCCC" android:textSize="16sp" />
+                        </LinearLayout>
+
+                        <View android:id="@+id/viewSeparatorMitra" android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginStart="60dp" android:background="#F0F0F0" android:visibility="gone"/>
+                        <LinearLayout android:id="@+id/llManajemenMitra" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true" android:gravity="center_vertical" android:paddingHorizontal="20dp" android:paddingVertical="12dp" android:visibility="gone">
+                            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/daftar_mitra" app:tint="#555555" />
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Manajemen Mitra" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Kelola program donasi Anda" android:textColor="#888888" android:textSize="11sp" />
+                            </LinearLayout>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textColor="#CCCCCC" android:textSize="16sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- ================= SECTION 2: AKTIVITAS ================= -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="24dp"
+                    android:text="AKTIVITAS"
+                    android:textColor="#888888"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="12dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="2dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingVertical="12dp">
+
+                        <LinearLayout android:id="@+id/llRiwayat" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true" android:gravity="center_vertical" android:paddingHorizontal="20dp" android:paddingVertical="12dp">
+                            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/histo" app:tint="#555555" />
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Riwayat Donasi" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="5 transaksi tercatat" android:textColor="#888888" android:textSize="11sp" />
+                            </LinearLayout>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textColor="#CCCCCC" android:textSize="16sp" />
+                        </LinearLayout>
+
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginStart="60dp" android:background="#F0F0F0"/>
+
+                        <LinearLayout android:id="@+id/llSertifikat" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true" android:gravity="center_vertical" android:paddingHorizontal="20dp" android:paddingVertical="12dp">
+                            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/sertif" app:tint="#555555" />
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sertifikat Donasi" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lihat sertifikat Anda" android:textColor="#888888" android:textSize="11sp" />
+                            </LinearLayout>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textColor="#CCCCCC" android:textSize="16sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- ================= SECTION 3: LAINNYA ================= -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="24dp"
+                    android:text="LAINNYA"
+                    android:textColor="#888888"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="24dp"
+                    app:cardBackgroundColor="#FFFFFF"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="2dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingVertical="12dp">
+
+                        <LinearLayout android:id="@+id/llKebijakanPrivasi" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true" android:gravity="center_vertical" android:paddingHorizontal="20dp" android:paddingVertical="12dp">
+                            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/kebijakan" app:tint="#555555" />
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Kebijakan Privasi" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pelajari bagaimana kami melindungi data Anda" android:textColor="#888888" android:textSize="11sp" />
+                            </LinearLayout>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textColor="#CCCCCC" android:textSize="16sp" />
+                        </LinearLayout>
+
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginStart="60dp" android:background="#F0F0F0"/>
+
+                        <LinearLayout android:id="@+id/llBantuan" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true" android:gravity="center_vertical" android:paddingHorizontal="20dp" android:paddingVertical="12dp">
+                            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/help" app:tint="#555555" />
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Bantuan &amp; FAQ" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Temukan jawaban atas pertanyaan Anda" android:textColor="#888888" android:textSize="11sp" />
+                            </LinearLayout>
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textColor="#CCCCCC" android:textSize="16sp" />
+                        </LinearLayout>
+
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginStart="60dp" android:background="#F0F0F0"/>
+
+                        <!-- Tombol Logout -->
+                        <LinearLayout android:id="@+id/btnLogout" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true" android:gravity="center_vertical" android:paddingHorizontal="20dp" android:paddingVertical="12dp">
+                            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@android:drawable/ic_lock_power_off" app:tint="#F44336" />
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:orientation="vertical">
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Keluar Akun (Logout)" android:textColor="#F44336" android:textSize="14sp" android:textStyle="bold" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</FrameLayout>
