@@ -200,6 +200,9 @@
         <action
             android:id="@+id/action_ProfileFragment_to_ManajemenProgramFragment"
             app:destination="@id/ManajemenProgramFragment" />
+        <action
+            android:id="@+id/action_ProfileFragment_to_FaqFragment"
+            app:destination="@id/faqFragment" />
     </fragment>
 
     <fragment
@@ -713,4 +716,8 @@
         android:name="com.aplikasiprojeksmt4.ui.BantuanFaqFragment"
         android:label="Bantuan &amp; FAQ"
         tools:layout="@layout/fragment_bantuan_faq" />
+    <fragment
+        android:id="@+id/faqFragment"
+        android:name="com.aplikasiprojeksmt4.ui.FaqFragment"
+        android:label="FaqFragment" />
 </navigation>

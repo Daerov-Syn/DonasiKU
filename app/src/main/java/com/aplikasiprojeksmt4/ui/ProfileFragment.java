@@ -84,8 +84,9 @@ public class ProfileFragment extends Fragment {
             Toast.makeText(getContext(), "Buka Kebijakan Privasi", Toast.LENGTH_SHORT).show();
         });
 
+        // Di dalam ProfileFragment.java
         binding.llBantuan.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "Buka Bantuan & FAQ", Toast.LENGTH_SHORT).show();
+            Navigation.findNavController(v).navigate(R.id.action_ProfileFragment_to_FaqFragment);
         });
 
         binding.btnLogout.setOnClickListener(v -> {
