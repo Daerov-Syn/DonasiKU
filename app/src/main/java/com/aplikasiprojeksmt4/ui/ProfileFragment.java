@@ -56,35 +56,28 @@ public class ProfileFragment extends Fragment {
             Navigation.findNavController(v).navigate(R.id.action_ProfileFragment_to_HistoryFragment)
         );
 
-        binding.llLaporanRealTime.setOnClickListener(v -> 
-            Navigation.findNavController(v).navigate(R.id.action_ProfileFragment_to_LaporanRealTimeFragment)
-        );
+        binding.llLaporanRealTime.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.action_ProfileFragment_to_LaporanRealTimeFragment);
+        });
 
-        // Menghubungkan ke Homepage Admin (Hanya muncul jika role admin)
         binding.llAdministrator.setOnClickListener(v -> 
             Navigation.findNavController(v).navigate(R.id.action_ProfileFragment_to_HomepageAdminFragment)
         );
 
-        // Menghubungkan ke Manajemen Mitra (Admin & Mitra)
         binding.llManajemenMitra.setOnClickListener(v -> 
             Navigation.findNavController(v).navigate(R.id.action_ProfileFragment_to_ManajemenProgramFragment)
         );
 
-        // Fitur Daftar Jadi Mitra
         binding.llDaftarMitra.setOnClickListener(v -> showDaftarMitraDialog());
 
-        // Fitur Baru di Bagian AKTIVITAS
         binding.llSertifikat.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "Buka Sertifikat Donasi", Toast.LENGTH_SHORT).show();
-            // Nanti ganti dengan Navigation.findNavController(v).navigate(R.id...);
+            Navigation.findNavController(v).navigate(R.id.action_ProfileFragment_to_SertifikatFragment);
         });
 
-        // Fitur Baru di Bagian LAINNYA
         binding.llKebijakanPrivasi.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "Buka Kebijakan Privasi", Toast.LENGTH_SHORT).show();
+            Navigation.findNavController(v).navigate(R.id.action_ProfileFragment_to_KebijakanPrivasiFragment);
         });
 
-        // Di dalam ProfileFragment.java
         binding.llBantuan.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(R.id.action_ProfileFragment_to_FaqFragment);
         });

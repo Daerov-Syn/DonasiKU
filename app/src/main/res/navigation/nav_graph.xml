@@ -203,6 +203,12 @@
         <action
             android:id="@+id/action_ProfileFragment_to_FaqFragment"
             app:destination="@id/faqFragment" />
+        <action
+            android:id="@+id/action_ProfileFragment_to_KebijakanPrivasiFragment"
+            app:destination="@id/kebijakanPrivasiFragment" />
+        <action
+            android:id="@+id/action_ProfileFragment_to_SertifikatFragment"
+            app:destination="@id/sertifikatFragment" />
     </fragment>
 
     <fragment
@@ -411,7 +417,7 @@
         android:id="@+id/LaporanRealTimeFragment"
         android:name="com.aplikasiprojeksmt4.ui.LaporanRealTimeFragment"
         android:label="Laporan Real-Time"
-        tools:layout="@layout/fragment_laporanrealtime" />
+        tools:layout="@layout/fragmentlaporanrealtime" />
 
     <fragment
         android:id="@+id/SertifDonasiFragment"
@@ -720,4 +726,16 @@
         android:id="@+id/faqFragment"
         android:name="com.aplikasiprojeksmt4.ui.FaqFragment"
         android:label="FaqFragment" />
+    <fragment
+        android:id="@+id/kebijakanPrivasiFragment"
+        android:name="com.aplikasiprojeksmt4.ui.KebijakanPrivasiFragment"
+        android:label="KebijakanPrivasiFragment" />
+    <fragment
+        android:id="@+id/sertifikatFragment"
+        android:name="com.aplikasiprojeksmt4.ui.SertifikatFragment"
+        android:label="SertifikatFragment" >
+        <action
+            android:id="@+id/action_SertifikatFragment_to_SertifDonasiFragment"
+            app:destination="@id/SertifDonasiFragment" />
+    </fragment>
 </navigation>
