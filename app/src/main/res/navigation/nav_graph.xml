@@ -70,7 +70,7 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_HomeFragment_to_NotifikasiPageFragment"
-            app:destination="@id/NotifikasiPageFragment" />
+            app:destination="@id/NotifikasiDonaturFragment" />
         <action
             android:id="@+id/action_HomeFragment_to_DonasiUangFragment"
             app:destination="@id/DonasiUangFragment" />
@@ -311,6 +311,12 @@
         android:id="@+id/NotifikasiPageFragment"
         android:name="com.aplikasiprojeksmt4.ui.NotifikasiPageFragment"
         android:label="Notifikasi"
+        tools:layout="@layout/fragment_notifkasipage" />
+
+    <fragment
+        android:id="@+id/NotifikasiDonaturFragment"
+        android:name="com.aplikasiprojeksmt4.ui.NotifikasiDonaturFragment"
+        android:label="Notifikasi Donatur"
         tools:layout="@layout/fragment_notifkasipage" />
 
     <fragment

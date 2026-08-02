@@ -30,13 +30,12 @@ public class HistoryFragment extends Fragment {
 
     private FragmentHistoryBinding binding;
     private RiwayatAdapter riwayatAdapter;
-    private List<Riwayat> allRiwayatList = new ArrayList<>(); // Penyimpan semua data dari database
-    private List<Riwayat> filteredList = new ArrayList<>();   // Data yang ditampilkan setelah difilter
+    private List<Riwayat> allRiwayatList = new ArrayList<>();
+    private List<Riwayat> filteredList = new ArrayList<>();
 
-    // Tambahkan variabel Firebase
     private FirebaseFirestore db;
     private FirebaseAuth auth;
-    private String currentActiveTab = "Semua"; // Menyimpan status tab saat ini
+    private String currentActiveTab = "Semua";
 
     @Nullable
     @Override
@@ -49,21 +48,18 @@ public class HistoryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Inisialisasi Firebase
         db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
 
         binding.btnBack.setOnClickListener(v -> Navigation.findNavController(v).navigateUp());
 
-        // Setup awal RecyclerView agar tidak kosong atau error
         riwayatAdapter = new RiwayatAdapter(filteredList);
         binding.rvHistory.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvHistory.setAdapter(riwayatAdapter);
 
-        // Panggil data langsung dari Firebase
+        // Langsung panggil data dari donatur_dana
         fetchRiwayatFromDatabase();
 
-        // Logika Klik Tab / Pagination
         binding.tabSemua.setOnClickListener(v -> {
             setActiveTab(binding.tabSemua);
             currentActiveTab = "Semua";
@@ -89,42 +85,35 @@ public class HistoryFragment extends Fragment {
         });
     }
 
-    // FUNGSI BARU: Mengambil data dari Firestore (Sesuai Database Anda)
     private void fetchRiwayatFromDatabase() {
-        String userId = auth.getUid();
-        if (userId == null) {
-            Toast.makeText(getContext(), "Anda belum login", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // Mengambil dari collection "donatur_dana" sesuai screenshot Anda
+        // MENGGUNAKAN KOLEKSI ASLI: donatur_dana
         db.collection("donatur_dana")
-                .whereEqualTo("userId", userId) // Sesuai nama field di Firebase
-                .orderBy("timestamp", Query.Direction.DESCENDING) // Mengurutkan dari yang terbaru
+                // orderBy digunakan jika data Anda punya field 'timestamp'.
+                // Jika tidak punya, aplikasi bisa crash. Jadi saya amankan dulu tanpa orderBy.
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
+                        Toast.makeText(getContext(), "Gagal memuat riwayat", Toast.LENGTH_SHORT).show();
                         return;
                     }
 
                     if (value != null) {
-                        allRiwayatList.clear(); // Bersihkan list lama
+                        allRiwayatList.clear();
 
                         for (DocumentSnapshot doc : value.getDocuments()) {
-                            // Ambil field sesuai persis dengan teks di kolom Firebase Anda
+                            // Ambil data sesuai format struktur yang Anda buat di donatur_dana
                             String judul = doc.getString("programNama");
                             String tanggal = doc.getString("tanggalDonasi");
                             String statusRaw = doc.getString("status");
 
-                            // Nominal berupa Angka (Number), ambil pakai getLong
+                            // Logika untuk Nominal / Jumlah
                             Long nominalDb = doc.getLong("nominal");
                             String nominalFormat = "-";
                             if (nominalDb != null) {
-                                // Format angka menjadi ada pemisah ribuan (titik) dan awalan Rp
                                 nominalFormat = "Rp " + String.format("%,d", nominalDb).replace(',', '.');
                             }
 
-                            // Konversi Status Firebase ke Status UI (Tersalurkan/Diproses)
-                            String statusFinal = "Diproses"; // Default jika status tidak dikenali
+                            // Konversi status agar seragam (Tersalurkan/Diproses)
+                            String statusFinal = "Diproses";
                             if (statusRaw != null) {
                                 if (statusRaw.equalsIgnoreCase("Berhasil") || statusRaw.equalsIgnoreCase("Success")) {
                                     statusFinal = "Tersalurkan";
@@ -133,24 +122,20 @@ public class HistoryFragment extends Fragment {
                                 }
                             }
 
-                            // Kategori (Karena dari donatur_dana, kita set "Uang" dulu)
-                            String kategori = "Uang";
-
-                            // Antisipasi data kosong/null agar tidak crash
+                            // Cegah NullPointerException
                             judul = (judul != null) ? judul : "Tanpa Judul";
                             tanggal = (tanggal != null) ? tanggal : "-";
+                            String kategori = "Uang"; // Default karena donatur_dana biasanya transaksi uang
 
-                            // Masukkan ke dalam Model
                             allRiwayatList.add(new Riwayat(judul, tanggal, statusFinal, nominalFormat, kategori));
                         }
 
-                        // Update tampilan UI sesuai tab yang sedang diklik
+                        // Segarkan layar dengan data baru
                         filterData(currentActiveTab);
                     }
                 });
     }
 
-    // Fungsi untuk menyaring daftar berdasarkan tab
     private void filterData(String kategori) {
         filteredList.clear();
 
@@ -163,7 +148,6 @@ public class HistoryFragment extends Fragment {
                 }
             }
         } else {
-            // Filter berdasarkan Uang atau Barang
             for (Riwayat r : allRiwayatList) {
                 if (r.getKategori().equalsIgnoreCase(kategori)) {
                     filteredList.add(r);
@@ -171,11 +155,9 @@ public class HistoryFragment extends Fragment {
             }
         }
 
-        // Beritahu adapter bahwa datanya sudah diperbarui
         riwayatAdapter.updateData(filteredList);
     }
 
-    // Fungsi animasi warna tab
     private void setActiveTab(MaterialButton activeTab) {
         MaterialButton[] allTabs = {binding.tabSemua, binding.tabUang, binding.tabBarang, binding.tabProses};
         for (MaterialButton tab : allTabs) {

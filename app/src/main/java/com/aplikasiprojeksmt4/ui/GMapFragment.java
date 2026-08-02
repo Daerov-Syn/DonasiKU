@@ -26,17 +26,21 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class GMapFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private FusedLocationProviderClient fusedLocationClient;
     private ActivityResultLauncher<String[]> locationPermissionRequest;
+    private FirebaseFirestore db;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity());
+        db = FirebaseFirestore.getInstance();
 
         locationPermissionRequest = registerForActivityResult(new ActivityResultContracts
                 .RequestMultiplePermissions(), result -> {
@@ -44,15 +48,12 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback {
                     Manifest.permission.ACCESS_FINE_LOCATION, false);
             Boolean coarseLocationGranted = result.getOrDefault(
                     Manifest.permission.ACCESS_COARSE_LOCATION, false);
-            if (fineLocationGranted != null && fineLocationGranted) {
-                // Precise location access granted.
-                enableMyLocation();
-            } else if (coarseLocationGranted != null && coarseLocationGranted) {
-                // Only approximate location access granted.
+
+            if ((fineLocationGranted != null && fineLocationGranted) ||
+                    (coarseLocationGranted != null && coarseLocationGranted)) {
                 enableMyLocation();
             } else {
-                // No location access granted.
-                Toast.makeText(requireContext(), "Izin lokasi diperlukan untuk fitur ini", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), "Izin lokasi diperlukan", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -66,6 +67,8 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // Memanggil map dengan cara yang aman
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
         if (mapFragment != null) {
@@ -78,9 +81,12 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback {
         mMap = googleMap;
         checkLocationPermission();
 
-        // Tambahkan marker default (Contoh: Surabaya) jika lokasi GPS belum didapat
-        LatLng surabaya = new LatLng(-7.2575, 112.7521);
-        mMap.addMarker(new MarkerOptions().position(surabaya).title("Kantor Pusat DonasiKu Surabaya"));
+        // Fokuskan kamera ke Surabaya sebagai default (Zoom level 11)
+        LatLng pusatSurabaya = new LatLng(-7.250445, 112.768845);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pusatSurabaya, 11f));
+
+        // Memuat titik lokasi dari Firebase
+        loadMarkersFromFirebase();
     }
 
     private void checkLocationPermission() {
@@ -97,23 +103,47 @@ public class GMapFragment extends Fragment implements OnMapReadyCallback {
 
     private void enableMyLocation() {
         if (mMap == null) return;
-
         try {
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(true);
 
             fusedLocationClient.getLastLocation()
-                    .addOnSuccessListener(requireActivity(), new OnSuccessListener<Location>() {
-                        @Override
-                        public void onSuccess(Location location) {
-                            if (location != null) {
-                                LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-                                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f));
-                            }
+                    .addOnSuccessListener(requireActivity(), location -> {
+                        if (location != null) {
+                            LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                            // Jangan animate camera lagi ke lokasi user agar view awal tetap ke Surabaya sesuai UI
+                            // mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f));
                         }
                     });
         } catch (SecurityException e) {
             e.printStackTrace();
         }
+    }
+
+    private void loadMarkersFromFirebase() {
+        // Asumsi data titik penyaluran ada di koleksi "titik_penyaluran" (bisa diubah sesuai struktur database Anda)
+        db.collection("titik_penyaluran")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            // Ambil data latitude dan longitude. Pastikan field di Firebase bertipe Number/Double
+                            Double lat = document.getDouble("latitude");
+                            Double lng = document.getDouble("longitude");
+                            String namaProgram = document.getString("nama_program");
+
+                            if (lat != null && lng != null) {
+                                LatLng point = new LatLng(lat, lng);
+                                mMap.addMarker(new MarkerOptions()
+                                        .position(point)
+                                        .title(namaProgram != null ? namaProgram : "Titik Penyaluran"));
+                            }
+                        }
+                    } else {
+                        // Jika tidak ada data dari Firebase, tampilkan data dummy di Bulak Banteng (Sesuai Gambar Figma)
+                        LatLng bulakBanteng = new LatLng(-7.2144, 112.7761);
+                        mMap.addMarker(new MarkerOptions().position(bulakBanteng).title("Santunan Lansia Bulak Banteng"));
+                    }
+                });
     }
 }
