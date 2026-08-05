@@ -16,8 +16,14 @@ public class CategoryPieChart extends View {
     private Paint orangePaint;
     private Paint whitePaint;
     private RectF rectF;
-    private float barangPercentage = 66f;
-    private float uangPercentage = 34f;
+    private float barangPercentage = 50f;
+    private float uangPercentage = 50f;
+
+    public void setPercentages(float barang, float uang) {
+        this.barangPercentage = barang;
+        this.uangPercentage = uang;
+        invalidate(); // Redraw
+    }
 
     public CategoryPieChart(Context context) {
         super(context);

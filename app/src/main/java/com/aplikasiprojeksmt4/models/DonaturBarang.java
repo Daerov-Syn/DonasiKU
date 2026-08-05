@@ -1,6 +1,6 @@
 package com.aplikasiprojeksmt4.models;
 
-import com.google.firebase.firestore.ServerTimestamp;
+import com.google.firebase.Timestamp;
 import java.util.Date;
 
 public class DonaturBarang {
@@ -14,8 +14,7 @@ public class DonaturBarang {
     private String metodePengiriman;
     private String status;
     private String programId; // FK ke programs
-    @ServerTimestamp
-    private Date timestamp;
+    private Object timestamp;
 
     public DonaturBarang() {}
 
@@ -40,6 +39,21 @@ public class DonaturBarang {
     public void setStatus(String status) { this.status = status; }
     public String getProgramId() { return programId; }
     public void setProgramId(String programId) { this.programId = programId; }
-    public Date getTimestamp() { return timestamp; }
-    public void setTimestamp(Date timestamp) { this.timestamp = timestamp; }
+
+    public Date getTimestamp() {
+        if (timestamp instanceof Timestamp) {
+            return ((Timestamp) timestamp).toDate();
+        } else if (timestamp instanceof Date) {
+            return (Date) timestamp;
+        } else if (timestamp instanceof String) {
+            try {
+                return new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault()).parse((String) timestamp);
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    public void setTimestamp(Object timestamp) { this.timestamp = timestamp; }
 }

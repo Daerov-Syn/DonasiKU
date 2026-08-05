@@ -1,6 +1,6 @@
 package com.aplikasiprojeksmt4.models;
 
-import com.google.firebase.firestore.ServerTimestamp;
+import com.google.firebase.Timestamp;
 import java.util.Date;
 
 public class DonaturDana {
@@ -18,8 +18,7 @@ public class DonaturDana {
     private int jumlahTransaksi;
     private int jumlahKategori;
 
-    @ServerTimestamp
-    private Date timestamp;
+    private Object timestamp;
 
     public DonaturDana() {}
 
@@ -61,6 +60,23 @@ public class DonaturDana {
     public void setJumlahKategori(int jumlahKategori) {
         this.jumlahKategori = jumlahKategori;
     }
-    public Date getTimestamp() { return timestamp; }
-    public void setTimestamp(Date timestamp) { this.timestamp = timestamp; }
+
+    public Date getTimestamp() {
+        if (timestamp instanceof Timestamp) {
+            return ((Timestamp) timestamp).toDate();
+        } else if (timestamp instanceof Date) {
+            return (Date) timestamp;
+        } else if (timestamp instanceof String) {
+            try {
+                // Mencoba parsing jika formatnya standar ISO atau sejenisnya
+                // Jika tidak bisa, kembalikan null atau handle sesuai kebutuhan
+                return new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault()).parse((String) timestamp);
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    public void setTimestamp(Object timestamp) { this.timestamp = timestamp; }
 }

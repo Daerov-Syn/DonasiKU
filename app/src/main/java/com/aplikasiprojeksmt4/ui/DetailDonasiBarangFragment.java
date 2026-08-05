@@ -20,14 +20,19 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class DetailDonasiBarangFragment extends Fragment {
 
     private FragmentDetailDonasiBarangBinding binding;
     private FirebaseFirestore db;
     private String programId;
+    private String programName;
     private List<DonaturBarang> donaturList = new ArrayList<>();
     private DonaturAdapter adapter;
 
@@ -51,6 +56,7 @@ public class DetailDonasiBarangFragment extends Fragment {
         binding.btnDonasiSekarang.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             bundle.putString("programId", programId);
+            bundle.putString("programName", programName);
             Navigation.findNavController(v).navigate(R.id.action_DetailDonasiBarangFragment_to_FormDonasiBarangFragment, bundle);
         });
 
@@ -70,10 +76,12 @@ public class DetailDonasiBarangFragment extends Fragment {
 
         db.collection("programs").document(programId)
                 .addSnapshotListener((doc, error) -> {
+                    if (binding == null) return;
                     if (error != null || doc == null || !doc.exists()) return;
 
                     Program p = doc.toObject(Program.class);
                     if (p != null) {
+                        programName = p.getNama();
                         binding.tvDetailNama.setText(p.getNama());
                         binding.tvDetailOrganisasi.setText(p.getOrganisasi());
                         binding.tvDetailDeskripsi.setText(p.getDeskripsi());
@@ -104,11 +112,30 @@ public class DetailDonasiBarangFragment extends Fragment {
                             Glide.with(this).load(p.getImageUrl()).into(binding.ivProgramDetail);
                         }
                         
-                        // Placeholder data for stats (Can be linked to other collections later)
-                        binding.tvPenerimaCount.setText("45");
-                        binding.tvHariLagi.setText("12");
+                        // Data stats from Program object
+                        binding.tvDonaturCount.setText(String.valueOf(p.getDonatur_count()));
+                        binding.tvPenerimaCount.setText(String.valueOf(p.getPenerima_count()));
+                        binding.tvHariLagi.setText(calculateDaysLeft(p.getBatas_waktu()));
                     }
                 });
+    }
+
+    private String calculateDaysLeft(String batasWaktu) {
+        if (batasWaktu == null || batasWaktu.isEmpty()) return "0";
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd / MM / yyyy", Locale.getDefault());
+            Date dateBatas = sdf.parse(batasWaktu);
+            Date now = new Date();
+            
+            if (dateBatas == null) return "0";
+            
+            long diff = dateBatas.getTime() - now.getTime();
+            if (diff < 0) return "0";
+            
+            return String.valueOf(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+        } catch (Exception e) {
+            return "0";
+        }
     }
 
     private void loadDonaturTerbaru() {
@@ -116,9 +143,10 @@ public class DetailDonasiBarangFragment extends Fragment {
 
         db.collection("donatur_barang")
                 .whereEqualTo("programId", programId)
-                .orderBy("timestamp", Query.Direction.DESCENDING)
+                .orderBy("timestamp", com.google.firebase.firestore.Query.Direction.DESCENDING)
                 .limit(5)
                 .addSnapshotListener((value, error) -> {
+                    if (binding == null) return;
                     if (error != null) return;
                     if (value != null) {
                         donaturList.clear();
@@ -130,7 +158,6 @@ public class DetailDonasiBarangFragment extends Fragment {
                             }
                         }
                         adapter.notifyDataSetChanged();
-                        binding.tvDonaturCount.setText(String.valueOf(value.size()));
                     }
                 });
     }

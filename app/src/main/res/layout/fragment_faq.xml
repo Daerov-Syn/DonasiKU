@@ -81,12 +81,15 @@
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp">
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:padding="16dp">
-                    <com.google.android.material.card.MaterialCardView android:layout_width="40dp" android:layout_height="40dp" app:cardBackgroundColor="#E8F5E9" app:cardCornerRadius="12dp" app:cardElevation="0dp">
-                        <ImageView android:layout_width="24dp" android:layout_height="24dp" android:layout_gravity="center" android:src="@android:drawable/ic_menu_send" app:tint="#4CAF50" />
-                    </com.google.android.material.card.MaterialCardView>
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:text="Bagaimana cara berdonasi uang?" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textColor="#999999" android:textSize="18sp" android:textStyle="bold" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                        <com.google.android.material.card.MaterialCardView android:layout_width="40dp" android:layout_height="40dp" app:cardBackgroundColor="#E8F5E9" app:cardCornerRadius="12dp" app:cardElevation="0dp">
+                            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:layout_gravity="center" android:src="@android:drawable/ic_menu_send" app:tint="#4CAF50" />
+                        </com.google.android.material.card.MaterialCardView>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:text="Bagaimana cara berdonasi uang?" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
+                        <TextView android:id="@+id/arrowUang1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⌄" android:textColor="#999999" android:textSize="22sp" android:textStyle="bold" />
+                    </LinearLayout>
+                    <TextView android:id="@+id/ansUang1" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="Buka menu Home, pilih program donasi, klik 'Donasikan Sekarang', lalu pilih metode pembayaran (Bank/E-Wallet) dan selesaikan transaksi." android:textColor="#555555" android:textSize="13sp" android:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -102,12 +105,15 @@
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp">
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:padding="16dp">
-                    <com.google.android.material.card.MaterialCardView android:layout_width="40dp" android:layout_height="40dp" app:cardBackgroundColor="#E0F2F1" app:cardCornerRadius="12dp" app:cardElevation="0dp">
-                        <ImageView android:layout_width="24dp" android:layout_height="24dp" android:layout_gravity="center" android:src="@android:drawable/ic_menu_search" app:tint="#009688" />
-                    </com.google.android.material.card.MaterialCardView>
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:text="Apakah donasi saya benar-benar sampai ke penerima?" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textColor="#999999" android:textSize="18sp" android:textStyle="bold" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                        <com.google.android.material.card.MaterialCardView android:layout_width="40dp" android:layout_height="40dp" app:cardBackgroundColor="#E0F2F1" app:cardCornerRadius="12dp" app:cardElevation="0dp">
+                            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:layout_gravity="center" android:src="@android:drawable/ic_menu_search" app:tint="#009688" />
+                        </com.google.android.material.card.MaterialCardView>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:text="Apakah donasi saya sampai ke penerima?" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
+                        <TextView android:id="@+id/arrowUang2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⌄" android:textColor="#999999" android:textSize="22sp" android:textStyle="bold" />
+                    </LinearLayout>
+                    <TextView android:id="@+id/ansUang2" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="Ya, setiap donasi dicatat secara real-time. Anda bisa mengecek status penyaluran melalui menu 'Riwayat' atau 'Laporan Real-Time'." android:textColor="#555555" android:textSize="13sp" android:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -123,12 +129,15 @@
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp">
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:padding="16dp">
-                    <com.google.android.material.card.MaterialCardView android:layout_width="40dp" android:layout_height="40dp" app:cardBackgroundColor="#FFF8E1" app:cardCornerRadius="12dp" app:cardElevation="0dp">
-                        <ImageView android:layout_width="24dp" android:layout_height="24dp" android:layout_gravity="center" android:src="@android:drawable/ic_secure" app:tint="#FFC107" />
-                    </com.google.android.material.card.MaterialCardView>
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:text="Bisakah saya berdonasi secara anonim?" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textColor="#999999" android:textSize="18sp" android:textStyle="bold" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                        <com.google.android.material.card.MaterialCardView android:layout_width="40dp" android:layout_height="40dp" app:cardBackgroundColor="#FFF8E1" app:cardCornerRadius="12dp" app:cardElevation="0dp">
+                            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:layout_gravity="center" android:src="@android:drawable/ic_secure" app:tint="#FFC107" />
+                        </com.google.android.material.card.MaterialCardView>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:text="Bisakah saya berdonasi secara anonim?" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
+                        <TextView android:id="@+id/arrowUang3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⌄" android:textColor="#999999" android:textSize="22sp" android:textStyle="bold" />
+                    </LinearLayout>
+                    <TextView android:id="@+id/ansUang3" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="Bisa. Pilih opsi 'Donasi Anonim' di halaman formulir donasi agar nama Anda tidak ditampilkan di daftar donatur publik." android:textColor="#555555" android:textSize="13sp" android:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -154,12 +163,15 @@
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp">
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:padding="16dp">
-                    <com.google.android.material.card.MaterialCardView android:layout_width="40dp" android:layout_height="40dp" app:cardBackgroundColor="#EFEBE9" app:cardCornerRadius="12dp" app:cardElevation="0dp">
-                        <ImageView android:layout_width="24dp" android:layout_height="24dp" android:layout_gravity="center" android:src="@android:drawable/ic_menu_gallery" app:tint="#795548" />
-                    </com.google.android.material.card.MaterialCardView>
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:text="Barang apa saja yang bisa saya donasikan?" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textColor="#999999" android:textSize="18sp" android:textStyle="bold" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                        <com.google.android.material.card.MaterialCardView android:layout_width="40dp" android:layout_height="40dp" app:cardBackgroundColor="#EFEBE9" app:cardCornerRadius="12dp" app:cardElevation="0dp">
+                            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:layout_gravity="center" android:src="@android:drawable/ic_menu_gallery" app:tint="#795548" />
+                        </com.google.android.material.card.MaterialCardView>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:text="Barang apa saja yang bisa didonasikan?" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
+                        <TextView android:id="@+id/arrowBarang1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⌄" android:textColor="#999999" android:textSize="22sp" android:textStyle="bold" />
+                    </LinearLayout>
+                    <TextView android:id="@+id/ansBarang1" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="Kami menerima sembako, pakaian layak pakai, perlengkapan sekolah, dan obat-obatan. Pastikan barang dalam kondisi bersih dan layak." android:textColor="#555555" android:textSize="13sp" android:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -175,12 +187,15 @@
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp">
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:padding="16dp">
-                    <com.google.android.material.card.MaterialCardView android:layout_width="40dp" android:layout_height="40dp" app:cardBackgroundColor="#E3F2FD" app:cardCornerRadius="12dp" app:cardElevation="0dp">
-                        <ImageView android:layout_width="24dp" android:layout_height="24dp" android:layout_gravity="center" android:src="@android:drawable/ic_menu_mylocation" app:tint="#2196F3" />
-                    </com.google.android.material.card.MaterialCardView>
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:text="Di mana saja drop point tersedia?" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textColor="#999999" android:textSize="18sp" android:textStyle="bold" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                        <com.google.android.material.card.MaterialCardView android:layout_width="40dp" android:layout_height="40dp" app:cardBackgroundColor="#E3F2FD" app:cardCornerRadius="12dp" app:cardElevation="0dp">
+                            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:layout_gravity="center" android:src="@android:drawable/ic_menu_mylocation" app:tint="#2196F3" />
+                        </com.google.android.material.card.MaterialCardView>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:text="Di mana saja drop point tersedia?" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
+                        <TextView android:id="@+id/arrowBarang2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⌄" android:textColor="#999999" android:textSize="22sp" android:textStyle="bold" />
+                    </LinearLayout>
+                    <TextView android:id="@+id/ansBarang2" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="Lokasi drop point tersedia di beberapa titik mitra di Surabaya. Cek menu 'Daftar Mitra' pada profil untuk melihat peta lokasi terdekat." android:textColor="#555555" android:textSize="13sp" android:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -196,12 +211,15 @@
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp">
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:padding="16dp">
-                    <com.google.android.material.card.MaterialCardView android:layout_width="40dp" android:layout_height="40dp" app:cardBackgroundColor="#ECEFF1" app:cardCornerRadius="12dp" app:cardElevation="0dp">
-                        <ImageView android:layout_width="24dp" android:layout_height="24dp" android:layout_gravity="center" android:src="@android:drawable/ic_menu_camera" app:tint="#607D8B" />
-                    </com.google.android.material.card.MaterialCardView>
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:text="Mengapa saya perlu upload foto barang?" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textColor="#999999" android:textSize="18sp" android:textStyle="bold" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                        <com.google.android.material.card.MaterialCardView android:layout_width="40dp" android:layout_height="40dp" app:cardBackgroundColor="#ECEFF1" app:cardCornerRadius="12dp" app:cardElevation="0dp">
+                            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:layout_gravity="center" android:src="@android:drawable/ic_menu_camera" app:tint="#607D8B" />
+                        </com.google.android.material.card.MaterialCardView>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:text="Mengapa perlu upload foto barang?" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
+                        <TextView android:id="@+id/arrowBarang3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⌄" android:textColor="#999999" android:textSize="22sp" android:textStyle="bold" />
+                    </LinearLayout>
+                    <TextView android:id="@+id/ansBarang3" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="Foto diperlukan untuk memudahkan admin memverifikasi kondisi barang sebelum dijemput oleh kurir atau diterima di drop point." android:textColor="#555555" android:textSize="13sp" android:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -227,12 +245,15 @@
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp">
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:padding="16dp">
-                    <com.google.android.material.card.MaterialCardView android:layout_width="40dp" android:layout_height="40dp" app:cardBackgroundColor="#FBE9E7" app:cardCornerRadius="12dp" app:cardElevation="0dp">
-                        <ImageView android:layout_width="24dp" android:layout_height="24dp" android:layout_gravity="center" android:src="@android:drawable/btn_star_big_on" />
-                    </com.google.android.material.card.MaterialCardView>
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:text="Bagaimana cara mendapatkan sertifikat donasi?" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textColor="#999999" android:textSize="18sp" android:textStyle="bold" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                        <com.google.android.material.card.MaterialCardView android:layout_width="40dp" android:layout_height="40dp" app:cardBackgroundColor="#FBE9E7" app:cardCornerRadius="12dp" app:cardElevation="0dp">
+                            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:layout_gravity="center" android:src="@android:drawable/btn_star_big_on" />
+                        </com.google.android.material.card.MaterialCardView>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:text="Cara dapat sertifikat donasi?" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
+                        <TextView android:id="@+id/arrowAkun1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⌄" android:textColor="#999999" android:textSize="22sp" android:textStyle="bold" />
+                    </LinearLayout>
+                    <TextView android:id="@+id/ansAkun1" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="Sertifikat otomatis tersedia di menu 'Sertifikat' pada profil setelah donasi Anda berhasil diverifikasi oleh admin kami." android:textColor="#555555" android:textSize="13sp" android:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -248,12 +269,15 @@
                 app:cardBackgroundColor="#FFFFFF"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp">
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:padding="16dp">
-                    <com.google.android.material.card.MaterialCardView android:layout_width="40dp" android:layout_height="40dp" app:cardBackgroundColor="#F3E5F5" app:cardCornerRadius="12dp" app:cardElevation="0dp">
-                        <ImageView android:layout_width="24dp" android:layout_height="24dp" android:layout_gravity="center" android:src="@android:drawable/ic_menu_manage" app:tint="#9C27B0"/>
-                    </com.google.android.material.card.MaterialCardView>
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:text="Lupa kata sandi, bagaimana cara reset?" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textColor="#999999" android:textSize="18sp" android:textStyle="bold" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                        <com.google.android.material.card.MaterialCardView android:layout_width="40dp" android:layout_height="40dp" app:cardBackgroundColor="#F3E5F5" app:cardCornerRadius="12dp" app:cardElevation="0dp">
+                            <ImageView android:layout_width="24dp" android:layout_height="24dp" android:layout_gravity="center" android:src="@android:drawable/ic_menu_manage" app:tint="#9C27B0"/>
+                        </com.google.android.material.card.MaterialCardView>
+                        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_weight="1" android:text="Lupa kata sandi, bagaimana cara reset?" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" />
+                        <TextView android:id="@+id/arrowAkun2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="⌄" android:textColor="#999999" android:textSize="22sp" android:textStyle="bold" />
+                    </LinearLayout>
+                    <TextView android:id="@+id/ansAkun2" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="Klik 'Lupa Password' pada halaman login, masukkan email Anda, dan ikuti instruksi reset yang dikirimkan melalui email resmi kami." android:textColor="#555555" android:textSize="13sp" android:visibility="gone" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

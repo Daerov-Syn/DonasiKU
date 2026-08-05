@@ -70,19 +70,19 @@
                 <androidx.cardview.widget.CardView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_margin="4dp" app:cardBackgroundColor="#FFFFFF" app:cardCornerRadius="12dp" app:cardElevation="2dp">
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Total Dana" android:textColor="#757575" android:textSize="11sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="Rp 300rb" android:textColor="#9C27B0" android:textSize="18sp" android:textStyle="bold" />
+                        <TextView android:id="@+id/tv_stat_total_dana" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="Rp 0" android:textColor="#9C27B0" android:textSize="18sp" android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_margin="4dp" app:cardBackgroundColor="#FFFFFF" app:cardCornerRadius="12dp" app:cardElevation="2dp">
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Paket Barang" android:textColor="#757575" android:textSize="11sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="5" android:textColor="#4CAF50" android:textSize="18sp" android:textStyle="bold" />
+                        <TextView android:id="@+id/tv_stat_total_barang" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="0" android:textColor="#4CAF50" android:textSize="18sp" android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_margin="4dp" app:cardBackgroundColor="#FFFFFF" app:cardCornerRadius="12dp" app:cardElevation="2dp">
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
                         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Penerima" android:textColor="#757575" android:textSize="11sp" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="40" android:textColor="#2196F3" android:textSize="18sp" android:textStyle="bold" />
+                        <TextView android:id="@+id/tv_stat_total_penerima" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="0" android:textColor="#2196F3" android:textSize="18sp" android:textStyle="bold" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_rowWeight="1" android:layout_columnWeight="1" android:layout_margin="4dp" app:cardBackgroundColor="#FFFFFF" app:cardCornerRadius="12dp" app:cardElevation="2dp">
@@ -128,12 +128,12 @@
                             <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="8dp">
                                 <View android:id="@+id/d1" android:layout_width="10dp" android:layout_height="10dp" android:layout_centerVertical="true" android:background="@drawable/dot_active" android:backgroundTint="@color/primary_purple" />
                                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toEndOf="@id/d1" android:layout_marginStart="8dp" android:text="Donasi Barang" android:textColor="#000000" android:textSize="12sp" />
-                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="66%" android:textColor="#000000" android:textStyle="bold" />
+                                <TextView android:id="@+id/tv_percent_barang" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="0%" android:textColor="#000000" android:textStyle="bold" />
                             </RelativeLayout>
                             <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
                                 <View android:id="@+id/d2" android:layout_width="10dp" android:layout_height="10dp" android:layout_centerVertical="true" android:background="@drawable/dot_active" android:backgroundTint="#FF9800" />
                                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toEndOf="@id/d2" android:layout_marginStart="8dp" android:text="Donasi Uang" android:textColor="#000000" android:textSize="12sp" />
-                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="34%" android:textColor="#000000" android:textStyle="bold" />
+                                <TextView android:id="@+id/tv_percent_uang" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="0%" android:textColor="#000000" android:textStyle="bold" />
                             </RelativeLayout>
                         </LinearLayout>
                     </LinearLayout>

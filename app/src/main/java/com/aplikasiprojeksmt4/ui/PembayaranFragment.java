@@ -153,6 +153,7 @@ public class PembayaranFragment extends Fragment {
         donasi.setProgramNama(programName); // Save program name for history display
         donasi.setStatus("Berhasil");
         donasi.setMetodePengiriman(method + (bank != null && !bank.isEmpty() ? " - " + bank : ""));
+        donasi.setTimestamp(FieldValue.serverTimestamp());
         
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy, HH:mm", new Locale("id", "ID"));
         donasi.setTanggalDonasi(sdf.format(new Date()));

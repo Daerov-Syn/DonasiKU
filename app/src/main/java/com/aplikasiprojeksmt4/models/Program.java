@@ -1,6 +1,6 @@
 package com.aplikasiprojeksmt4.models;
 
-import com.google.firebase.firestore.ServerTimestamp;
+import com.google.firebase.Timestamp;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -19,15 +19,14 @@ public class Program implements Serializable {
     private String no_whatsapp;
     private String imageUrl;
     private String status; // Default: "Menunggu Review"
-    private long terkumpul;
+    private Object terkumpul;
     private String dibuat_oleh;
     private String dibuat_oleh_nama; // Nama Mitra/Organisasi
     private int donatur_count;
     private int penerima_count;
     private long siap_tarik;
     
-    @ServerTimestamp
-    private Date created_at;
+    private Object created_at;
 
     public Program() {
         // Required for Firebase
@@ -76,8 +75,19 @@ public class Program implements Serializable {
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
 
-    public long getTerkumpul() { return terkumpul; }
-    public void setTerkumpul(long terkumpul) { this.terkumpul = terkumpul; }
+    public long getTerkumpul() {
+        if (terkumpul instanceof Number) {
+            return ((Number) terkumpul).longValue();
+        } else if (terkumpul instanceof String) {
+            try {
+                return Long.parseLong((String) terkumpul);
+            } catch (Exception e) {
+                return 0;
+            }
+        }
+        return 0;
+    }
+    public void setTerkumpul(Object terkumpul) { this.terkumpul = terkumpul; }
 
     public String getDibuat_oleh() { return dibuat_oleh; }
     public void setDibuat_oleh(String dibuat_oleh) { this.dibuat_oleh = dibuat_oleh; }
@@ -94,8 +104,22 @@ public class Program implements Serializable {
     public long getSiap_tarik() { return siap_tarik; }
     public void setSiap_tarik(long siap_tarik) { this.siap_tarik = siap_tarik; }
 
-    public Date getCreated_at() { return created_at; }
-    public void setCreated_at(Date created_at) { this.created_at = created_at; }
+    public Date getCreated_at() {
+        if (created_at instanceof Timestamp) {
+            return ((Timestamp) created_at).toDate();
+        } else if (created_at instanceof Date) {
+            return (Date) created_at;
+        } else if (created_at instanceof String) {
+            try {
+                return new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault()).parse((String) created_at);
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    public void setCreated_at(Object created_at) { this.created_at = created_at; }
     
     public long getTargetValue() {
         if (target == null) return 0;
@@ -109,6 +133,7 @@ public class Program implements Serializable {
 
     public String getTargetUnit() {
         if (target == null) return "";
-        return target.replaceAll("[0-9]", "").trim();
+        String unit = target.replaceAll("[0-9]", "").trim();
+        return unit.isEmpty() ? "Unit" : unit;
     }
 }

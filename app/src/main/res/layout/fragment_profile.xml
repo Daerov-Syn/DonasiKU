@@ -131,7 +131,7 @@
                             android:gravity="center"
                             android:orientation="vertical">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dana" android:textColor="#555555" android:textSize="12sp" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="Rp 300rb" android:textColor="#9C27B0" android:textSize="16sp" android:textStyle="bold" />
+                            <TextView android:id="@+id/tvProfileTotalDana" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="Rp 0" android:textColor="#9C27B0" android:textSize="16sp" android:textStyle="bold" />
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="0dp"
@@ -140,7 +140,7 @@
                             android:gravity="center"
                             android:orientation="vertical">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Paket Barang" android:textColor="#555555" android:textSize="12sp" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="5" android:textColor="#9C27B0" android:textSize="16sp" android:textStyle="bold" />
+                            <TextView android:id="@+id/tvProfileTotalBarang" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="0" android:textColor="#9C27B0" android:textSize="16sp" android:textStyle="bold" />
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="0dp"
@@ -149,7 +149,7 @@
                             android:gravity="center"
                             android:orientation="vertical">
                             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Terbantu" android:textColor="#555555" android:textSize="12sp" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="40" android:textColor="#9C27B0" android:textSize="16sp" android:textStyle="bold" />
+                            <TextView android:id="@+id/tvProfileTotalTerbantu" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:text="0" android:textColor="#9C27B0" android:textSize="16sp" android:textStyle="bold" />
                         </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>

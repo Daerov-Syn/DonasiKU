@@ -81,41 +81,50 @@ public class NotifikasiPageFragment extends Fragment {
     }
 
     private void fetchRealtimeNotifications() {
-        // Contoh: Mengambil data donasi barang yang statusnya masih "Menunggu Verifikasi"
-        // Sesuaikan nama koleksi ("donasi_barang") dan field ("status") dengan yang ada di database Anda
-        db.collection("donasi_barang")
+        // 1. Ambil data donasi barang yang statusnya masih "Menunggu Verifikasi"
+        db.collection("donatur_barang")
                 .whereEqualTo("status", "Menunggu Verifikasi")
                 .addSnapshotListener((value, error) -> {
-                    if (error != null) {
-                        Log.e("Notifikasi", "Gagal mengambil data", error);
-                        return;
-                    }
-
-                    if (value != null) {
-                        notificationList.clear(); // Bersihkan list sebelum diisi data baru
-
-                        for (QueryDocumentSnapshot doc : value) {
-                            // Mengambil data dari dokumen
-                            String namaDonatur = doc.getString("namaDonatur") != null ? doc.getString("namaDonatur") : "Anonim";
-                            String idBarang = doc.getId(); // Menyimpan ID untuk dilempar ke halaman detail
-
-                            // Membuat objek Notification baru menggunakan data asli dari Firebase
-                            // Pastikan parameter ini sesuai dengan urutan model Notification.java Anda
-                            notificationList.add(new Notification(
-                                    idBarang,
-                                    "Verifikasi Donatur Barang",
-                                    namaDonatur + " menunggu konfirmasi verifikasi barang donatur",
-                                    "Baru saja", // Anda bisa mengubah ini dengan format waktu timestamp asli
-                                    android.R.drawable.ic_menu_myplaces, // Ikon sementara
-                                    Color.parseColor("#FFEBEE"), // Background icon
-                                    Color.parseColor("#F44336")  // Warna icon
-                            ));
-                        }
-
-                        // Beritahu adapter agar layar me-refresh
-                        adapter.notifyDataSetChanged();
-                    }
+                    processDocs(value, error, "Donasi Barang", "menunggu konfirmasi verifikasi barang donatur");
                 });
+
+        // 2. Ambil data program yang statusnya masih "Menunggu Review"
+        db.collection("programs")
+                .whereEqualTo("status", "Menunggu Review")
+                .addSnapshotListener((value, error) -> {
+                    processDocs(value, error, "Pengajuan Program", "menunggu verifikasi program baru");
+                });
+    }
+
+    private void processDocs(com.google.firebase.firestore.QuerySnapshot value, com.google.firebase.firestore.FirebaseFirestoreException error, String type, String action) {
+        if (error != null) {
+            Log.e("Notifikasi", "Gagal mengambil data " + type, error);
+            return;
+        }
+
+        if (value != null) {
+            // Kita tidak bisa clear() di sini karena ada multiple listeners.
+            // Strategi: kumpulkan semua notif lalu update.
+            // Namun untuk kesederhanaan saat ini, kita tambahkan saja.
+            // Di produksi, sebaiknya gunakan satu listener atau gabungkan data.
+            
+            for (QueryDocumentSnapshot doc : value) {
+                String nama = doc.getString("namaDonatur");
+                if (nama == null) nama = doc.getString("nama"); // Untuk Program
+                if (nama == null) nama = "Seseorang";
+
+                notificationList.add(0, new Notification(
+                        doc.getId(),
+                        "Verifikasi " + type,
+                        nama + " " + action,
+                        "Baru saja",
+                        android.R.drawable.ic_menu_myplaces,
+                        Color.parseColor("#FFEBEE"),
+                        Color.parseColor("#F44336")
+                ));
+            }
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override

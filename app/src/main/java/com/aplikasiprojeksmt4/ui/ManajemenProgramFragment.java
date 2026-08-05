@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,12 +14,15 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.aplikasiprojeksmt4.R;
+import com.aplikasiprojeksmt4.adapters.MitraNotificationAdapter;
+import com.aplikasiprojeksmt4.models.Notification;
+import android.graphics.Color;
 import com.aplikasiprojeksmt4.adapters.ProgramAdapter;
 import com.aplikasiprojeksmt4.databinding.FragmentManajemenProgramBinding;
 import com.aplikasiprojeksmt4.models.Program;
-import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -30,8 +34,19 @@ public class ManajemenProgramFragment extends Fragment {
     private FragmentManajemenProgramBinding binding;
     private FirebaseFirestore db;
     private FirebaseAuth auth;
-    private ProgramAdapter programAdapter;
-    private List<Program> programList = new ArrayList<>();
+    
+    private ProgramAdapter berandaAdapter;
+    private List<Program> activePrograms = new ArrayList<>();
+    
+    private ProgramAdapter semuaProgramAdapter;
+    private List<Program> allPrograms = new ArrayList<>();
+
+    private MitraNotificationAdapter notifAdapter;
+    private List<Notification> notificationList = new ArrayList<>();
+
+    private ListenerRegistration programsListener;
+    private ListenerRegistration notifDanaListener;
+    private ListenerRegistration notifBarangListener;
 
     @Nullable
     @Override
@@ -46,41 +61,49 @@ public class ManajemenProgramFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         
-        setupRecyclerView();
+        setupRecyclerViews();
         setupBottomNavigation();
-        loadUserPrograms();
         loadDashboardHeader();
+        listenToUserPrograms();
 
-        // Navigasi ke Tambah Program
         binding.btnBuatProgram.setOnClickListener(v -> 
             Navigation.findNavController(v).navigate(R.id.action_ManajemenProgramFragment_to_TambahProgramFragment)
         );
         
-        // Navigasi ke Tarik Dana dari Menu Grid
         binding.btnTarikDanaMenu.setOnClickListener(v -> 
             Navigation.findNavController(v).navigate(R.id.action_ManajemenProgramFragment_to_TarikDanaFragment)
         );
-        
-        //if (binding.btnBuatProgramMenu != null) {
-            //binding.btnBuatProgramMenu.setOnClickListener(v ->
-                //Navigation.findNavController(v).navigate(R.id.action_ManajemenProgramFragment_to_TambahProgramFragment)
-            //);
-        //}
+
+        binding.btnMenuDonatur.setOnClickListener(v -> 
+            Navigation.findNavController(v).navigate(R.id.action_ManajemenProgram_to_DaftarDonatur)
+        );
     }
 
-    private void setupRecyclerView() {
-        programAdapter = new ProgramAdapter(programList);
-        programAdapter.setOnItemClickListener(program -> {
+    private void setupRecyclerViews() {
+        // Adapter untuk Beranda (Program Aktif)
+        berandaAdapter = new ProgramAdapter(activePrograms);
+        berandaAdapter.setOnItemClickListener(program -> {
             Bundle bundle = new Bundle();
             bundle.putSerializable("program", program);
             Navigation.findNavController(requireView()).navigate(R.id.action_ManajemenProgramFragment_to_DetailDonasiMitraFragment, bundle);
         });
-
         binding.rvProgramBerjalan.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.rvProgramBerjalan.setAdapter(programAdapter);
-        
+        binding.rvProgramBerjalan.setAdapter(berandaAdapter);
+
+        // Adapter untuk Tab Program (Semua Program)
+        semuaProgramAdapter = new ProgramAdapter(allPrograms);
+        semuaProgramAdapter.setOnItemClickListener(program -> {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("program", program);
+            Navigation.findNavController(requireView()).navigate(R.id.action_ManajemenProgramFragment_to_DetailDonasiMitraFragment, bundle);
+        });
         binding.rvSemuaProgramMitra.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.rvSemuaProgramMitra.setAdapter(programAdapter);
+        binding.rvSemuaProgramMitra.setAdapter(semuaProgramAdapter);
+
+        // Notifikasi
+        notifAdapter = new MitraNotificationAdapter(notificationList);
+        binding.rvNotifikasiMitra.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvNotifikasiMitra.setAdapter(notifAdapter);
     }
 
     private void loadDashboardHeader() {
@@ -88,79 +111,127 @@ public class ManajemenProgramFragment extends Fragment {
         if (userId == null) return;
 
         db.collection("users").document(userId).get()
-                .addOnSuccessListener(documentSnapshot -> {
-                    if (isAdded() && documentSnapshot.exists()) {
-                        String name = documentSnapshot.getString("nama");
-                        String fotoUrl = documentSnapshot.getString("fotoUrl");
-                        if (fotoUrl == null) fotoUrl = documentSnapshot.getString("foto");
-
-                        if (name != null && !name.isEmpty()) {
-                            binding.tvName.setText(name);
-                        }
-
-                        if (fotoUrl != null && !fotoUrl.isEmpty()) {
-                            loadProfileImage(fotoUrl);
-                        } else if (auth.getCurrentUser() != null && auth.getCurrentUser().getPhotoUrl() != null) {
-                            loadProfileImage(auth.getCurrentUser().getPhotoUrl().toString());
-                        } else {
-                            //binding.ivProfileImage.setImageResource(R.drawable.logo);
-                        }
-                    }
-                })
-                .addOnFailureListener(e -> Log.e("ManajemenFragment", "Gagal load header dari users", e));
-    }
-
-    private void loadProfileImage(String url) {
-        if (!isAdded()) return;
-        //Glide.with(this)
-                //.load(url)
-                //.circleCrop()
-               // .placeholder(R.drawable.logo)
-                //.error(R.drawable.logo)
-                //.into(binding.ivProfileImage);
-    }
-
-    private void loadUserPrograms() {
-        String userId = auth.getUid();
-        if (userId == null) return;
-
-        db.collection("programs")
-                .whereEqualTo("dibuat_oleh", userId)
-                .orderBy("created_at", Query.Direction.DESCENDING)
-                .addSnapshotListener((value, error) -> {
-                    if (error != null) {
-                        Log.e("ManajemenFragment", "Listen failed.", error);
-                        return;
-                    }
-
-                    if (value != null) {
-                        programList.clear();
-                        long totalDana = 0;
-                        int aktifCount = 0;
-                        
-                        for (QueryDocumentSnapshot doc : value) {
-                            Program program = doc.toObject(Program.class);
-                            program.setId(doc.getId());
-                            programList.add(program);
-                            
-                            totalDana += program.getTerkumpul();
-                            if ("Aktif".equalsIgnoreCase(program.getStatus())) {
-                                aktifCount++;
-                            }
-                        }
-                        
-                        programAdapter.notifyDataSetChanged();
-                        updateStatsUI(totalDana, programList.size(), aktifCount);
+                .addOnSuccessListener(doc -> {
+                    if (binding != null && isAdded() && doc.exists()) {
+                        String name = doc.getString("nama");
+                        if (name != null) binding.tvName.setText(name);
                     }
                 });
     }
 
-    private void updateStatsUI(long totalDana, int totalProgram, int aktifCount) {
-        binding.tvMainAmount.setText("Rp. " + String.format("%,d", totalDana).replace(',', '.'));
-        binding.tvProgramAktifCount.setText(String.valueOf(totalProgram));
+    private void listenToUserPrograms() {
+        String userId = auth.getUid();
+        if (userId == null) return;
+
+        programsListener = db.collection("programs")
+                .whereEqualTo("dibuat_oleh", userId)
+                .orderBy("created_at", Query.Direction.DESCENDING)
+                .addSnapshotListener((value, error) -> {
+                    if (binding == null || !isAdded()) return;
+                    if (error != null) {
+                        Log.e("ManajemenFragment", "Error sync programs", error);
+                        return;
+                    }
+
+                    if (value != null) {
+                        activePrograms.clear();
+                        allPrograms.clear();
+                        long totalDana = 0;
+                        int totalDonatur = 0;
+                        int totalPenerima = 0;
+                        
+                        for (QueryDocumentSnapshot doc : value) {
+                            Program p = doc.toObject(Program.class);
+                            p.setId(doc.getId());
+                            
+                            allPrograms.add(p);
+                            
+                            if ("Aktif".equalsIgnoreCase(p.getStatus())) {
+                                activePrograms.add(p);
+                                totalDana += p.getTerkumpul();
+                                totalDonatur += p.getDonatur_count();
+                                totalPenerima += p.getPenerima_count();
+                            }
+                        }
+                        
+                        // Update UI Beranda
+                        if (activePrograms.isEmpty()) {
+                            binding.layoutEmptyState.setVisibility(View.VISIBLE);
+                            binding.rvProgramBerjalan.setVisibility(View.GONE);
+                        } else {
+                            binding.layoutEmptyState.setVisibility(View.GONE);
+                            binding.rvProgramBerjalan.setVisibility(View.VISIBLE);
+                            berandaAdapter.notifyDataSetChanged();
+                        }
+
+                        // Update UI Tab Program
+                        semuaProgramAdapter.notifyDataSetChanged();
+
+                        // Update Stats Header
+                        updateStatsUI(totalDana, totalDonatur, totalPenerima);
+                        
+                        // Load Notifications after we have program IDs
+                        loadMitraNotifications(allPrograms);
+                    }
+                });
+    }
+
+    private void loadMitraNotifications(List<Program> myPrograms) {
+        if (myPrograms.isEmpty()) return;
+        List<String> programIds = new ArrayList<>();
+        for (Program p : myPrograms) programIds.add(p.getId());
+
+        // Dana Notifs
+        notifDanaListener = db.collection("donatur_dana")
+                .whereIn("programId", programIds)
+                .orderBy("timestamp", Query.Direction.DESCENDING)
+                .limit(10)
+                .addSnapshotListener((value, error) -> {
+                    if (value != null) processDonationDocs(value, "Uang");
+                });
+
+        // Barang Notifs
+        notifBarangListener = db.collection("donatur_barang")
+                .whereIn("programId", programIds)
+                .orderBy("timestamp", Query.Direction.DESCENDING)
+                .limit(10)
+                .addSnapshotListener((value, error) -> {
+                    if (value != null) processDonationDocs(value, "Barang");
+                });
+    }
+
+    private void processDonationDocs(com.google.firebase.firestore.QuerySnapshot value, String type) {
+        // Simple logic: add to list and sort
+        for (QueryDocumentSnapshot doc : value) {
+            String name = doc.getString("namaDonatur");
+            if (name == null) name = "Anonim";
+            String progId = doc.getString("programId");
+            
+            String title = type.equals("Uang") ? "Donasi Baru Masuk! 💜" : "Donasi Barang Masuk! 📦";
+            String desc = name + " baru saja berdonasi untuk program Anda.";
+
+            notificationList.add(0, new Notification(
+                    doc.getId(),
+                    title,
+                    desc,
+                    "Baru saja",
+                    android.R.drawable.ic_menu_myplaces,
+                    Color.parseColor("#FCE4EC"),
+                    Color.parseColor("#E91E63"),
+                    progId // Pass programId for navigation
+            ));
+        }
+        notifAdapter.notifyDataSetChanged();
+    }
+
+    private void updateStatsUI(long totalDana, int donatur, int penerima) {
+        String formattedDana = "Rp. " + java.text.NumberFormat.getInstance(new java.util.Locale("id", "ID")).format(totalDana);
+        binding.tvMainAmount.setText(formattedDana);
+        binding.tvTotalDonatur.setText(String.valueOf(donatur));
+        binding.tvTotalPenerima.setText(String.valueOf(penerima));
         
-        binding.tvTotalDonatur.setText("87"); 
-        binding.tvTotalPenerima.setText("45");
+        // Sisa Hari logic can be added if needed, for now use active program count as placeholder or just 0
+        binding.tvProgramAktifCount.setText(String.valueOf(activePrograms.size()));
     }
 
     private void setupBottomNavigation() {
@@ -198,6 +269,9 @@ public class ManajemenProgramFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        if (programsListener != null) programsListener.remove();
+        if (notifDanaListener != null) notifDanaListener.remove();
+        if (notifBarangListener != null) notifBarangListener.remove();
         binding = null;
     }
 }

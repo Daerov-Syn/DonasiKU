@@ -54,6 +54,16 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             binding.ivIcon.setImageResource(notification.getIconResId());
             binding.cardIcon.setCardBackgroundColor(notification.getIconBgColor());
             binding.ivIcon.setColorFilter(notification.getIconTint());
+
+            itemView.setOnClickListener(v -> {
+                if (notification.getTitle().contains("Barang")) {
+                    android.os.Bundle bundle = new android.os.Bundle();
+                    bundle.putString("donationId", notification.getId());
+                    androidx.navigation.Navigation.findNavController(v).navigate(com.aplikasiprojeksmt4.R.id.DetailVerifikasiBarangFragment, bundle);
+                } else if (notification.getTitle().contains("Program")) {
+                    androidx.navigation.Navigation.findNavController(v).navigate(com.aplikasiprojeksmt4.R.id.VerifikasiAjuanProgramAdminFragment);
+                }
+            });
         }
     }
 }

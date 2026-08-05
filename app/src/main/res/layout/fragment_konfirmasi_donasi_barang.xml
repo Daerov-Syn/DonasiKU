@@ -121,6 +121,7 @@
                             android:text="Kategori Barang"
                             android:textSize="14sp" />
                         <TextView
+                            android:id="@+id/tvKategoriBarang"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -139,6 +140,7 @@
                             android:text="Kondisi"
                             android:textSize="14sp" />
                         <TextView
+                            android:id="@+id/tvKondisiBarang"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -324,6 +326,7 @@
                                 android:textColor="@color/black"
                                 android:textStyle="bold" />
                             <TextView
+                                android:id="@+id/tvStatusWaktu"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="27 Mei, 13.00 WIB"

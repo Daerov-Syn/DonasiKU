@@ -155,9 +155,10 @@
                         android:gravity="center"
                         android:orientation="vertical">
                         <TextView
+                            android:id="@+id/tvHeaderTotalDana"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Rp 300rb"
+                            android:text="Rp 0"
                             android:textColor="#000000"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -176,9 +177,10 @@
                         android:gravity="center"
                         android:orientation="vertical">
                         <TextView
+                            android:id="@+id/tvHeaderTotalPaket"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="3 Paket"
+                            android:text="0 Paket"
                             android:textColor="#000000"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -197,9 +199,10 @@
                         android:gravity="center"
                         android:orientation="vertical">
                         <TextView
+                            android:id="@+id/tvHeaderTotalTersalur"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="3"
+                            android:text="0"
                             android:textColor="#000000"
                             android:textSize="18sp"
                             android:textStyle="bold" />

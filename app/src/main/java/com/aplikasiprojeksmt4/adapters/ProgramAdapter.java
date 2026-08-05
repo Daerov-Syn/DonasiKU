@@ -59,6 +59,11 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
         
         holder.binding.tvPersentaseTarget.setText(progress + "% dari target");
 
+        // New Stats from Figma
+        holder.binding.tvDonaturCount.setText(String.valueOf(program.getDonatur_count()));
+        holder.binding.tvPenerimaCount.setText(String.valueOf(program.getPenerima_count()));
+        holder.binding.tvHariLagi.setText(calculateDaysLeft(program.getBatas_waktu()));
+
         if (program.getImageUrl() != null && !program.getImageUrl().isEmpty()) {
             Glide.with(holder.itemView.getContext())
                     .load(program.getImageUrl())
@@ -85,6 +90,19 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
     @Override
     public int getItemCount() {
         return programs.size();
+    }
+
+    private String calculateDaysLeft(String deadline) {
+        if (deadline == null || deadline.isEmpty()) return "0";
+        try {
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy", java.util.Locale.getDefault());
+            java.util.Date date = sdf.parse(deadline);
+            long diff = date.getTime() - System.currentTimeMillis();
+            long days = diff / (24 * 60 * 60 * 1000);
+            return String.valueOf(Math.max(0, days));
+        } catch (Exception e) {
+            return "0";
+        }
     }
 
     public void setPrograms(List<Program> newPrograms) {

@@ -27,19 +27,17 @@
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
                         <androidx.cardview.widget.CardView android:layout_width="40dp" android:layout_height="40dp" app:cardBackgroundColor="#F3E5F5" app:cardCornerRadius="20dp" app:cardElevation="0dp">
-                            <TextView android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center" android:text="ZA" android:textColor="#9C27B0" android:textStyle="bold" />
+                            <TextView android:id="@+id/tv_inisial" android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center" android:text="ZA" android:textColor="#9C27B0" android:textStyle="bold" />
                         </androidx.cardview.widget.CardView>
                         <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="12dp" android:orientation="vertical">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Zulpa Apipah" android:textColor="#000000" android:textSize="15sp" android:textStyle="bold" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Diunggah 8 Jul 2026, 14:20" android:textColor="#888888" android:textSize="11sp" />
+                            <TextView android:id="@+id/tv_nama_donatur" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Zulpa Apipah" android:textColor="#000000" android:textSize="15sp" android:textStyle="bold" />
+                            <TextView android:id="@+id/tv_waktu_upload" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Diunggah 8 Jul 2026, 14:20" android:textColor="#888888" android:textSize="11sp" />
                         </LinearLayout>
                     </LinearLayout>
 
-                    <!-- Dummy Photos -->
-                    <LinearLayout android:layout_width="match_parent" android:layout_height="70dp" android:layout_marginTop="16dp" android:orientation="horizontal">
-                        <ImageView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_marginEnd="8dp" android:background="#EEEEEE" android:scaleType="centerCrop" android:src="@android:drawable/ic_menu_gallery" app:tint="#BDBDBD"/>
-                        <ImageView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_marginEnd="8dp" android:background="#EEEEEE" android:scaleType="centerCrop" android:src="@android:drawable/ic_menu_gallery" app:tint="#BDBDBD"/>
-                        <ImageView android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="#EEEEEE" android:scaleType="centerCrop" android:src="@android:drawable/ic_menu_gallery" app:tint="#BDBDBD"/>
+                    <!-- User Photos -->
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="200dp" android:layout_marginTop="16dp" android:orientation="horizontal">
+                        <ImageView android:id="@+id/iv_foto_barang" android:layout_width="match_parent" android:layout_height="match_parent" android:background="#EEEEEE" android:scaleType="centerCrop" android:src="@android:drawable/ic_menu_gallery" app:tint="#BDBDBD"/>
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -49,16 +47,9 @@
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Detail Barang" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" android:layout_marginBottom="12dp"/>
 
-                    <!-- Mengganti FlexboxLayout dengan HorizontalScrollView biasa -->
-                    <HorizontalScrollView android:layout_width="match_parent" android:layout_height="wrap_content" android:scrollbars="none" android:layout_marginBottom="12dp">
-                        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:orientation="horizontal">
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="8dp" android:background="@drawable/bg_outline_gray" android:paddingHorizontal="12dp" android:paddingVertical="6dp" android:text="Sembako" android:textColor="#555555" android:textSize="12sp" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="8dp" android:background="@drawable/bg_outline_gray" android:paddingHorizontal="12dp" android:paddingVertical="6dp" android:text="Pakaian" android:textColor="#555555" android:textSize="12sp" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_outline_gray" android:paddingHorizontal="12dp" android:paddingVertical="6dp" android:text="Perlengkapan Sekolah" android:textColor="#555555" android:textSize="12sp" />
-                        </LinearLayout>
-                    </HorizontalScrollView>
+                    <TextView android:id="@+id/tv_deskripsi_barang" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Deskripsi barang..." android:textColor="#555555" android:textSize="13sp" android:layout_marginBottom="12dp"/>
 
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_card_white" android:backgroundTint="#E8F5E9" android:paddingHorizontal="12dp" android:paddingVertical="6dp" android:text="Layak Pakai" android:textColor="#4CAF50" android:textSize="12sp" android:textStyle="bold" />
+                    <TextView android:id="@+id/tv_kondisi_barang" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/bg_card_white" android:backgroundTint="#E8F5E9" android:paddingHorizontal="12dp" android:paddingVertical="6dp" android:text="Layak Pakai" android:textColor="#4CAF50" android:textSize="12sp" android:textStyle="bold" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -66,14 +57,14 @@
             <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="24dp" app:cardBackgroundColor="#FFFFFF" app:cardCornerRadius="16dp" app:cardElevation="2dp">
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Catatan Admin" android:textColor="#000000" android:textSize="14sp" android:textStyle="bold" android:layout_marginBottom="12dp"/>
-                    <EditText android:layout_width="match_parent" android:layout_height="100dp" android:background="@drawable/bg_outline_gray" android:gravity="top|start" android:hint="Alasan jika ditolak..." android:padding="12dp" android:textColor="#000000" android:textColorHint="#BDBDBD" android:textSize="13sp" />
+                    <EditText android:id="@+id/et_catatan_admin" android:layout_width="match_parent" android:layout_height="100dp" android:background="@drawable/bg_outline_gray" android:gravity="top|start" android:hint="Alasan jika ditolak..." android:padding="12dp" android:textColor="#000000" android:textColorHint="#BDBDBD" android:textSize="13sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
             <!-- Action Buttons -->
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
                 <com.google.android.material.button.MaterialButton android:id="@+id/btn_setuju_detail" android:layout_width="0dp" android:layout_height="48dp" android:layout_weight="1" android:layout_marginEnd="8dp" android:text="✓ Setujui" android:textColor="#4CAF50" android:textSize="14sp" android:textStyle="bold" android:textAllCaps="false" app:backgroundTint="#E8F5E9" app:cornerRadius="12dp" app:elevation="0dp" android:insetTop="0dp" android:insetBottom="0dp"/>
-                <com.google.android.material.button.MaterialButton android:layout_width="0dp" android:layout_height="48dp" android:layout_weight="1" android:layout_marginStart="8dp" android:text="✗ Tolak" android:textColor="#F44336" android:textSize="14sp" android:textStyle="bold" android:textAllCaps="false" app:backgroundTint="#FFEBEE" app:cornerRadius="12dp" app:elevation="0dp" android:insetTop="0dp" android:insetBottom="0dp"/>
+                <com.google.android.material.button.MaterialButton android:id="@+id/btn_tolak_detail" android:layout_width="0dp" android:layout_height="48dp" android:layout_weight="1" android:layout_marginStart="8dp" android:text="✗ Tolak" android:textColor="#F44336" android:textSize="14sp" android:textStyle="bold" android:textAllCaps="false" app:backgroundTint="#FFEBEE" app:cornerRadius="12dp" app:elevation="0dp" android:insetTop="0dp" android:insetBottom="0dp"/>
             </LinearLayout>
 
         </LinearLayout>

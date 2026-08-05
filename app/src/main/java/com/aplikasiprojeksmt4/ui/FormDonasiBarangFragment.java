@@ -48,6 +48,15 @@ public class FormDonasiBarangFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        String programId = null;
+        String programName = null;
+        if (getArguments() != null) {
+            programId = getArguments().getString("programId");
+            programName = getArguments().getString("programName");
+        }
+        final String finalProgramId = programId;
+        final String finalProgramName = programName;
+
         binding.btnBack.setOnClickListener(v -> Navigation.findNavController(v).navigateUp());
 
         // 1. Kondisi Barang Selection
@@ -70,10 +79,19 @@ public class FormDonasiBarangFragment extends Fragment {
         updateMetodeUI(false);
 
         binding.btnJadwalkan.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("programId", finalProgramId);
+            bundle.putString("programName", finalProgramName);
+            bundle.putString("kondisi", selectedKondisi);
+            bundle.putString("deskripsi", binding.etDeskripsi.getText().toString());
+            if (selectedImageUri != null) {
+                bundle.putString("imageUri", selectedImageUri.toString());
+            }
+
             if (isDropPointSelected) {
-                Navigation.findNavController(v).navigate(R.id.action_FormDonasiBarangFragment_to_DropPointFragment);
+                Navigation.findNavController(v).navigate(R.id.action_FormDonasiBarangFragment_to_DropPointFragment, bundle);
             } else {
-                Navigation.findNavController(v).navigate(R.id.action_FormDonasiBarangFragment_to_AlamatPenjemputanFragment);
+                Navigation.findNavController(v).navigate(R.id.action_FormDonasiBarangFragment_to_AlamatPenjemputanFragment, bundle);
             }
         });
     }

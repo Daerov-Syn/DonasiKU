@@ -209,6 +209,11 @@
         <action
             android:id="@+id/action_ProfileFragment_to_SertifikatFragment"
             app:destination="@id/sertifikatFragment" />
+        <action
+            android:id="@+id/action_ProfileFragment_to_WelcomeFragment"
+            app:destination="@id/WelcomeFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
