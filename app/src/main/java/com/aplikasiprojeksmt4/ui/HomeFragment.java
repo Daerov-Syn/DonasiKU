@@ -1,6 +1,7 @@
 package com.aplikasiprojeksmt4.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,11 @@ import com.aplikasiprojeksmt4.adapters.ImpactAdapter;
 import com.aplikasiprojeksmt4.databinding.FragmentHomeBinding;
 import com.aplikasiprojeksmt4.models.Program;
 import com.aplikasiprojeksmt4.utils.SessionManager;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +31,10 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
     private SessionManager sessionManager;
     private FirebaseFirestore db;
+    private FirebaseAuth auth;
     private ListenerRegistration userListener;
+    private ListenerRegistration danaListener;
+    private ListenerRegistration barangListener;
     private ImpactAdapter impactAdapter;
     private List<Program> impactList = new ArrayList<>();
 
@@ -38,6 +44,7 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         sessionManager = new SessionManager(requireContext());
         db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
         return binding.getRoot();
     }
 
@@ -47,38 +54,35 @@ public class HomeFragment extends Fragment {
 
         setupRecyclerView();
         listenToUserData();
+        loadUserStats();
         fetchImpactStories();
 
-        // Navigasi ke halaman notifikasi
         binding.flNotification.setOnClickListener(v ->
                 Navigation.findNavController(v).navigate(R.id.action_HomeFragment_to_NotifikasiPageFragment)
         );
 
-        // Navigasi ke halaman Donasi Uang
         binding.btnDonasiUang.setOnClickListener(v ->
                 Navigation.findNavController(v).navigate(R.id.action_HomeFragment_to_DonasiUangFragment)
         );
 
-        // Navigasi ke halaman Donasi Barang
         binding.btnDonasiBarang.setOnClickListener(v ->
                 Navigation.findNavController(v).navigate(R.id.action_HomeFragment_to_DonasiBarangFragment)
         );
 
-        // Tombol Donasi Sekarang di Banner Hijau (Diarahkan ke Donasi Barang)
+        // Tombol Donasi Sekarang di Banner Hijau (Diarahkan ke Smart Matching)
         if (binding.btnDonasiSekarangHijau != null) {
             binding.btnDonasiSekarangHijau.setOnClickListener(v ->
-                    Navigation.findNavController(v).navigate(R.id.action_HomeFragment_to_DonasiBarangFragment)
+                    Navigation.findNavController(v).navigate(R.id.action_HomeFragment_to_SmartMatchingFragment)
             );
         }
 
-        // Lihat Semua Kisah Dampak
-        binding.tvLihatSemuaImpact.setOnClickListener(v -> {
-            Navigation.findNavController(v).navigate(R.id.action_HomeFragment_to_ProgramPageFragment);
-        });
+        // Tombol Aksi Cepat: Donasi Barang (Diarahkan ke Smart Matching)
+        binding.btnDonasiBarang.setOnClickListener(v ->
+                Navigation.findNavController(v).navigate(R.id.action_HomeFragment_to_SmartMatchingFragment)
+        );
     }
 
     private void setupRecyclerView() {
-        // Setup Impact RecyclerView (Kisah Dampak)
         impactAdapter = new ImpactAdapter(impactList);
         binding.rvImpact.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvImpact.setAdapter(impactAdapter);
@@ -91,6 +95,46 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    private void loadUserStats() {
+        String userId = auth.getUid();
+        if (userId == null) return;
+
+        danaListener = db.collection("donatur_dana").whereEqualTo("userId", userId)
+                .addSnapshotListener((danaDocs, e) -> {
+                    barangListener = db.collection("donatur_barang").whereEqualTo("userId", userId)
+                            .addSnapshotListener((barangDocs, e2) -> {
+                                if (binding == null || !isAdded()) return;
+                                
+                                long totalDonasi = 0;
+                                long totalPenerima = 0;
+                                double totalSampah = 0;
+
+                                if (danaDocs != null) {
+                                    totalDonasi += danaDocs.size();
+                                    for (QueryDocumentSnapshot doc : danaDocs) {
+                                        if ("Berhasil".equalsIgnoreCase(doc.getString("status"))) {
+                                            totalPenerima += 5; // Assumption based on Imagen 1
+                                        }
+                                    }
+                                }
+
+                                if (barangDocs != null) {
+                                    totalDonasi += barangDocs.size();
+                                    for (QueryDocumentSnapshot doc : barangDocs) {
+                                        if ("Diverifikasi".equalsIgnoreCase(doc.getString("status"))) {
+                                            totalSampah += 3.7; // Assumption: 3.7kg per item donation
+                                            totalPenerima += 8; 
+                                        }
+                                    }
+                                }
+
+                                binding.tvStatSampah.setText(String.format("%.1f kg", totalSampah));
+                                binding.tvStatDonasi.setText(String.valueOf(totalDonasi));
+                                binding.tvStatPenerima.setText(String.valueOf(totalPenerima));
+                            });
+                });
+    }
+
     private void fetchImpactStories() {
         db.collection("programs")
                 .whereEqualTo("status", "Selesai")
@@ -98,22 +142,15 @@ public class HomeFragment extends Fragment {
                 .limit(5)
                 .addSnapshotListener((value, error) -> {
                     if (error != null) return;
-
                     if (value != null) {
                         impactList.clear();
-                        for (com.google.firebase.firestore.DocumentSnapshot doc : value.getDocuments()) {
+                        for (QueryDocumentSnapshot doc : value) {
                             Program program = doc.toObject(Program.class);
-                            if (program != null) {
-                                program.setId(doc.getId());
-                                impactList.add(program);
-                            }
+                            program.setId(doc.getId());
+                            impactList.add(program);
                         }
-
-                        if (impactList.isEmpty()) {
-                            fetchRecentImpactPrograms();
-                        } else {
-                            impactAdapter.notifyDataSetChanged();
-                        }
+                        if (impactList.isEmpty()) fetchRecentImpactPrograms();
+                        else impactAdapter.notifyDataSetChanged();
                     }
                 });
     }
@@ -124,33 +161,25 @@ public class HomeFragment extends Fragment {
                 .limit(5)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (binding == null || !isAdded()) return;
                     impactList.clear();
-                    for (com.google.firebase.firestore.DocumentSnapshot doc : queryDocumentSnapshots) {
+                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         Program program = doc.toObject(Program.class);
-                        if (program != null) {
-                            program.setId(doc.getId());
-                            impactList.add(program);
-                        }
+                        program.setId(doc.getId());
+                        impactList.add(program);
                     }
                     impactAdapter.notifyDataSetChanged();
                 });
     }
 
     private void listenToUserData() {
-        String userId = sessionManager.getUserId();
-        if (userId == null) {
-            if (binding != null) {
-                binding.tvUserName.setText(sessionManager.getUsername());
-            }
-            return;
-        }
+        String userId = auth.getUid();
+        if (userId == null) return;
 
         userListener = db.collection("users").document(userId).addSnapshotListener((value, error) -> {
             if (binding == null || !isAdded()) return;
-
             if (value != null && value.exists()) {
                 String nama = value.getString("nama");
-                // Set nama pengguna, foto profil sudah dihapus dari desain
                 binding.tvUserName.setText(nama != null ? nama : "User");
             }
         });
@@ -159,9 +188,9 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (userListener != null) {
-            userListener.remove();
-        }
+        if (userListener != null) userListener.remove();
+        if (danaListener != null) danaListener.remove();
+        if (barangListener != null) barangListener.remove();
         binding = null;
     }
 }

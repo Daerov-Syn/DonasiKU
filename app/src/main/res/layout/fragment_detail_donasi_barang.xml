@@ -299,13 +299,15 @@
                 android:lineSpacingExtra="4dp" />
 
             <TextView
+                android:id="@+id/tvDonaturTerbaruTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="Donatur Terbaru"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvDonaturTerbaru"
@@ -313,6 +315,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:nestedScrollingEnabled="false"
+                android:visibility="gone"
                 tools:listitem="@layout/item_donatur" />
 
         </LinearLayout>

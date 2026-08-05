@@ -1,14 +1,20 @@
 package com.aplikasiprojeksmt4.adapters;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import com.aplikasiprojeksmt4.R;
 import com.aplikasiprojeksmt4.databinding.ItemProgramAdminBinding;
 import com.aplikasiprojeksmt4.models.Program;
 import com.bumptech.glide.Glide;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramViewHolder> {
 
@@ -50,19 +56,31 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
         
         holder.binding.progressIndicator.setProgress(progress);
         
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+        nf.setMaximumFractionDigits(0);
+
         if ("Dana".equalsIgnoreCase(program.getTipe())) {
-            holder.binding.tvTerkumpul.setText("Rp " + String.format("%,d", terkumpul).replace(',', '.') + " terkumpul");
+            holder.binding.tvTerkumpul.setText(nf.format(terkumpul) + " terkumpul");
+            holder.binding.tvTargetLabel.setText("Target: " + nf.format(target));
+            holder.binding.tvKurangLabel.setText("Kurang " + nf.format(Math.max(0, target - terkumpul)));
         } else {
             String unit = program.getTargetUnit();
             holder.binding.tvTerkumpul.setText(terkumpul + " " + unit + " terkumpul");
+            holder.binding.tvTargetLabel.setText("Target: " + target + " " + unit);
+            holder.binding.tvKurangLabel.setText("Kurang " + Math.max(0, target - terkumpul) + " " + unit);
         }
         
-        holder.binding.tvPersentaseTarget.setText(progress + "% dari target");
+        holder.binding.tvPersentaseTarget.setText(progress + "%");
 
         // New Stats from Figma
         holder.binding.tvDonaturCount.setText(String.valueOf(program.getDonatur_count()));
         holder.binding.tvPenerimaCount.setText(String.valueOf(program.getPenerima_count()));
-        holder.binding.tvHariLagi.setText(calculateDaysLeft(program.getBatas_waktu()));
+        
+        String daysLeft = calculateDaysLeft(program.getBatas_waktu());
+        holder.binding.tvHariLagiStat.setText(daysLeft);
+        holder.binding.tvDaysBadge.setText(daysLeft + " hari lagi");
+        
+        holder.binding.tvCategoryBadge.setText(program.getTipe());
 
         if (program.getImageUrl() != null && !program.getImageUrl().isEmpty()) {
             Glide.with(holder.itemView.getContext())
@@ -73,17 +91,18 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
             holder.binding.ivProgramImage.setImageResource(R.drawable.group_2);
         }
 
-        // Tombol Lihat Detail sesuai permintaan user
         holder.binding.btnLihatDetail.setOnClickListener(v -> {
-            if (listener != null) {
-                listener.onItemClick(program);
-            }
+            if (listener != null) listener.onItemClick(program);
+        });
+
+        holder.binding.btnEditProgram.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("program", program);
+            Navigation.findNavController(v).navigate(R.id.action_ManajemenProgramFragment_to_EditProgramFragment, bundle);
         });
 
         holder.itemView.setOnClickListener(v -> {
-            if (listener != null) {
-                listener.onItemClick(program);
-            }
+            if (listener != null) listener.onItemClick(program);
         });
     }
 
@@ -95,8 +114,9 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
     private String calculateDaysLeft(String deadline) {
         if (deadline == null || deadline.isEmpty()) return "0";
         try {
-            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy", java.util.Locale.getDefault());
-            java.util.Date date = sdf.parse(deadline);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            Date date = sdf.parse(deadline);
+            if (date == null) return "0";
             long diff = date.getTime() - System.currentTimeMillis();
             long days = diff / (24 * 60 * 60 * 1000);
             return String.valueOf(Math.max(0, days));

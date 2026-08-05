@@ -25,6 +25,7 @@ public class Program implements Serializable {
     private int donatur_count;
     private int penerima_count;
     private long siap_tarik;
+    private long sudah_ditarik;
     
     private Object created_at;
 
@@ -103,6 +104,9 @@ public class Program implements Serializable {
 
     public long getSiap_tarik() { return siap_tarik; }
     public void setSiap_tarik(long siap_tarik) { this.siap_tarik = siap_tarik; }
+
+    public long getSudah_ditarik() { return sudah_ditarik; }
+    public void setSudah_ditarik(long sudah_ditarik) { this.sudah_ditarik = sudah_ditarik; }
 
     public Date getCreated_at() {
         if (created_at instanceof Timestamp) {

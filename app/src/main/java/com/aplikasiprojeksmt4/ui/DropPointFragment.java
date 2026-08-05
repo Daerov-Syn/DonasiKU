@@ -1,6 +1,7 @@
 package com.aplikasiprojeksmt4.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.aplikasiprojeksmt4.R;
+import com.aplikasiprojeksmt4.adapters.DropPointAdapter;
 import com.aplikasiprojeksmt4.databinding.FragmentDropPointBinding;
 
 import android.net.Uri;
@@ -16,11 +20,14 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 public class DropPointFragment extends Fragment {
 
@@ -28,6 +35,9 @@ public class DropPointFragment extends Fragment {
     private FirebaseFirestore db;
     private FirebaseAuth auth;
     private FirebaseStorage storage;
+    private DropPointAdapter adapter;
+    private List<Map<String, Object>> dropPointList = new ArrayList<>();
+    private Map<String, Object> selectedDropPoint;
 
     @Nullable
     @Override
@@ -45,8 +55,31 @@ public class DropPointFragment extends Fragment {
 
         binding.btnBack.setOnClickListener(v -> Navigation.findNavController(v).navigateUp());
 
-        binding.btnKonfirmasiLokasi.setOnClickListener(v -> {
-            saveDonation(v);
+        setupRecyclerView();
+        loadDropPoints();
+
+        binding.btnKonfirmasiLokasi.setOnClickListener(this::saveDonation);
+    }
+
+    private void setupRecyclerView() {
+        adapter = new DropPointAdapter(dropPointList, item -> selectedDropPoint = item);
+        binding.rvDropPoints.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvDropPoints.setAdapter(adapter);
+    }
+
+    private void loadDropPoints() {
+        db.collection("titik_penyaluran").addSnapshotListener((value, error) -> {
+            if (error != null) return;
+            if (value != null) {
+                dropPointList.clear();
+                for (QueryDocumentSnapshot doc : value) {
+                    Map<String, Object> data = doc.getData();
+                    data.put("id", doc.getId());
+                    dropPointList.add(data);
+                }
+                if (!dropPointList.isEmpty()) selectedDropPoint = dropPointList.get(0);
+                adapter.notifyDataSetChanged();
+            }
         });
     }
 
@@ -59,8 +92,8 @@ public class DropPointFragment extends Fragment {
         String deskripsi = getArguments().getString("deskripsi");
         String imageUriStr = getArguments().getString("imageUri");
 
-        if (auth.getCurrentUser() == null) {
-            Toast.makeText(getContext(), "Silakan login terlebih dahulu", Toast.LENGTH_SHORT).show();
+        if (selectedDropPoint == null) {
+            Toast.makeText(getContext(), "Pilih drop point terlebih dahulu", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -91,7 +124,9 @@ public class DropPointFragment extends Fragment {
 
     private void performSave(View v, String programId, String programName, String kondisi, String deskripsi, String imageUrl) {
         String userId = auth.getCurrentUser().getUid();
-        
+        String dropPointName = (String) selectedDropPoint.get("nama");
+        String dropPointAddr = (String) selectedDropPoint.get("alamat");
+
         db.collection("users").document(userId).get().addOnSuccessListener(userDoc -> {
             String namaDonatur = userDoc.getString("nama");
             if (namaDonatur == null) namaDonatur = "Anonim";
@@ -104,7 +139,8 @@ public class DropPointFragment extends Fragment {
             donasi.put("kondisi", kondisi);
             donasi.put("deskripsi", deskripsi);
             donasi.put("fotoBarang", imageUrl);
-            donasi.put("metodePengiriman", "Drop Point");
+            donasi.put("metodePengiriman", "Drop Point: " + dropPointName);
+            donasi.put("alamatPenjemputan", dropPointAddr);
             donasi.put("status", "Menunggu Verifikasi");
             donasi.put("timestamp", FieldValue.serverTimestamp());
             donasi.put("tanggalDonasi", new java.text.SimpleDateFormat("d MMM yyyy, HH.mm", new java.util.Locale("id", "ID")).format(new java.util.Date()));
@@ -126,8 +162,6 @@ public class DropPointFragment extends Fragment {
 
     private void updateProgramStats(String programId) {
         if (programId == null) return;
-        // Sekarang hanya menambah donatur_count. 
-        // 'terkumpul' akan ditambah setelah di-ACC oleh admin di DetailVerifikasiBarangFragment.
         db.collection("programs").document(programId)
                 .update("donatur_count", FieldValue.increment(1));
     }

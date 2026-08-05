@@ -9,21 +9,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.aplikasiprojeksmt4.R;
-import com.aplikasiprojeksmt4.adapters.DonaturAdapter;
 import com.aplikasiprojeksmt4.databinding.FragmentDetailDonasiBarangBinding;
-import com.aplikasiprojeksmt4.models.DonaturBarang;
 import com.aplikasiprojeksmt4.models.Program;
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -33,8 +27,6 @@ public class DetailDonasiBarangFragment extends Fragment {
     private FirebaseFirestore db;
     private String programId;
     private String programName;
-    private List<DonaturBarang> donaturList = new ArrayList<>();
-    private DonaturAdapter adapter;
 
     @Nullable
     @Override
@@ -60,15 +52,7 @@ public class DetailDonasiBarangFragment extends Fragment {
             Navigation.findNavController(v).navigate(R.id.action_DetailDonasiBarangFragment_to_FormDonasiBarangFragment, bundle);
         });
 
-        setupRecyclerView();
         loadProgramDetail();
-        loadDonaturTerbaru();
-    }
-
-    private void setupRecyclerView() {
-        adapter = new DonaturAdapter(donaturList);
-        binding.rvDonaturTerbaru.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.rvDonaturTerbaru.setAdapter(adapter);
     }
 
     private void loadProgramDetail() {
@@ -136,30 +120,6 @@ public class DetailDonasiBarangFragment extends Fragment {
         } catch (Exception e) {
             return "0";
         }
-    }
-
-    private void loadDonaturTerbaru() {
-        if (programId == null) return;
-
-        db.collection("donatur_barang")
-                .whereEqualTo("programId", programId)
-                .orderBy("timestamp", com.google.firebase.firestore.Query.Direction.DESCENDING)
-                .limit(5)
-                .addSnapshotListener((value, error) -> {
-                    if (binding == null) return;
-                    if (error != null) return;
-                    if (value != null) {
-                        donaturList.clear();
-                        for (com.google.firebase.firestore.DocumentSnapshot doc : value.getDocuments()) {
-                            DonaturBarang d = doc.toObject(DonaturBarang.class);
-                            if (d != null) {
-                                d.setId(doc.getId());
-                                donaturList.add(d);
-                            }
-                        }
-                        adapter.notifyDataSetChanged();
-                    }
-                });
     }
 
     @Override

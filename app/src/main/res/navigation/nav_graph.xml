@@ -76,7 +76,7 @@
             app:destination="@id/DonasiUangFragment" />
         <action
             android:id="@+id/action_HomeFragment_to_DonasiBarangFragment"
-            app:destination="@id/DonasiBarangFragment" />
+            app:destination="@id/SmartMatchingFragment" />
         <action
             android:id="@+id/action_HomeFragment_to_ProgramPageFragment"
             app:destination="@id/PageProgramFragment" />
@@ -89,6 +89,9 @@
         <action
             android:id="@+id/action_HomeFragment_to_LaporanRealTimeFragment"
             app:destination="@id/LaporanRealTimeFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_SmartMatchingFragment"
+            app:destination="@id/SmartMatchingFragment" />
     </fragment>
 
     <fragment
@@ -234,6 +237,9 @@
         <action
             android:id="@+id/action_ManajemenProgramFragment_to_TambahProgramFragment"
             app:destination="@id/TambahProgramFragment" />
+        <action
+            android:id="@+id/action_ManajemenProgramFragment_to_EditProgramFragment"
+            app:destination="@id/EditProgramFragment" />
         <action
             android:id="@+id/action_ManajemenProgramFragment_to_DetailDonasiMitraFragment"
             app:destination="@id/DetailDonasiMitraFragment" />
@@ -748,5 +754,14 @@
         <action
             android:id="@+id/action_SertifikatFragment_to_SertifDonasiFragment"
             app:destination="@id/SertifDonasiFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SmartMatchingFragment"
+        android:name="com.aplikasiprojeksmt4.ui.SmartMatchingFragment"
+        android:label="Smart Matching"
+        tools:layout="@layout/fragment_smart_matching" >
+        <action
+            android:id="@+id/action_SmartMatchingFragment_to_DetailDonasiBarangFragment"
+            app:destination="@id/DetailDonasiBarangFragment" />
     </fragment>
 </navigation>

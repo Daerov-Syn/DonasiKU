@@ -255,7 +255,7 @@
                             android:layout_marginBottom="12dp"
                             android:clickable="true"
                             android:focusable="true"
-                            app:cardCornerRadius="12dp"
+                            app:cardCornerRadius="16dp"
                             app:cardElevation="0dp"
                             app:strokeColor="@color/light_gray"
                             app:strokeWidth="1dp">
@@ -264,19 +264,19 @@
                                 android:id="@+id/rlDropPoint"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="12dp">
+                                android:padding="16dp">
 
                                 <ImageView
                                     android:id="@+id/ivIconDrop"
-                                    android:layout_width="32dp"
-                                    android:layout_height="32dp"
-                                    android:src="@android:drawable/ic_dialog_map"
+                                    android:layout_width="36dp"
+                                    android:layout_height="36dp"
+                                    android:src="@drawable/home"
                                     app:tint="#FBC02D" />
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="12dp"
+                                    android:layout_marginStart="16dp"
                                     android:layout_toEndOf="@id/ivIconDrop"
                                     android:orientation="vertical">
 
@@ -285,21 +285,25 @@
                                         android:layout_height="wrap_content"
                                         android:text="Drop Point Terdekat"
                                         android:textColor="@color/black"
-                                        android:textStyle="bold" />
+                                        android:textStyle="bold"
+                                        android:textSize="15sp" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
                                         android:text="12 titik di kotamu"
+                                        android:textColor="#888888"
                                         android:textSize="12sp" />
                                 </LinearLayout>
 
                                 <RadioButton
                                     android:id="@+id/rbDropPoint"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
                                     android:layout_alignParentEnd="true"
                                     android:layout_centerVertical="true"
+                                    android:buttonTint="@color/primary_purple"
                                     android:clickable="false" />
                             </RelativeLayout>
                         </com.google.android.material.card.MaterialCardView>
@@ -310,7 +314,7 @@
                             android:layout_height="wrap_content"
                             android:clickable="true"
                             android:focusable="true"
-                            app:cardCornerRadius="12dp"
+                            app:cardCornerRadius="16dp"
                             app:cardElevation="0dp"
                             app:strokeColor="@color/primary_purple"
                             app:strokeWidth="1dp">
@@ -319,20 +323,20 @@
                                 android:id="@+id/rlEkspedisi"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="12dp"
+                                android:padding="16dp"
                                 android:background="#F3E5F5">
 
                                 <ImageView
                                     android:id="@+id/ivIconEkspedisi"
-                                    android:layout_width="32dp"
-                                    android:layout_height="32dp"
-                                    android:src="@android:drawable/ic_menu_send"
+                                    android:layout_width="36dp"
+                                    android:layout_height="36dp"
+                                    android:src="@drawable/dus"
                                     app:tint="#FF9800" />
 
                                 <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="12dp"
+                                    android:layout_marginStart="16dp"
                                     android:layout_toEndOf="@id/ivIconEkspedisi"
                                     android:orientation="vertical">
 
@@ -341,21 +345,25 @@
                                         android:layout_height="wrap_content"
                                         android:text="Kirim via Ekspedisi"
                                         android:textColor="@color/black"
-                                        android:textStyle="bold" />
+                                        android:textStyle="bold"
+                                        android:textSize="15sp" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginTop="2dp"
                                         android:text="JNE / J&amp;T / SiCepat"
+                                        android:textColor="#888888"
                                         android:textSize="12sp" />
                                 </LinearLayout>
 
                                 <RadioButton
                                     android:id="@+id/rbEkspedisi"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
                                     android:layout_alignParentEnd="true"
                                     android:layout_centerVertical="true"
+                                    android:buttonTint="@color/primary_purple"
                                     android:clickable="false"
                                     android:checked="true" />
                             </RelativeLayout>

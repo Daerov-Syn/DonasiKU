@@ -82,10 +82,19 @@ public class KonfirmasiDonasiBarangFragment extends Fragment {
                         if (metode != null && metode.contains("Drop Point")) {
                             binding.cardResi.setVisibility(View.GONE);
                             binding.layoutOngkosKirim.setVisibility(View.GONE);
-                            binding.tvSuccessSubtext.setText("Silakan antar barang Anda ke\nlokasi drop point terpilih");
+                            binding.tvSuccessSubtext.setText("Silahkan antar barang donasi Anda ke\nDrop Point yang telah dipilih");
+                            
+                            binding.tvStep2Title.setText("Menunggu Barang Diantar");
+                            binding.tvStep2Sub.setText("Batas waktu kedatangan 2x24 jam");
+                            binding.ivStep2.setImageResource(android.R.drawable.ic_menu_call);
                         } else {
                             binding.cardResi.setVisibility(View.VISIBLE);
                             binding.layoutOngkosKirim.setVisibility(View.VISIBLE);
+                            binding.tvSuccessSubtext.setText("Tim kami menghubungi dalam 1x24 jam\nuntuk jadwal penjemputan");
+                            
+                            binding.tvStep2Title.setText("Menunggu Kurir");
+                            binding.tvStep2Sub.setText("Penjemputan sedang dijadwalkan");
+                            binding.ivStep2.setImageResource(android.R.drawable.ic_menu_directions);
                         }
                     }
                 });
