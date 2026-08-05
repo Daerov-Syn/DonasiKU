@@ -18,9 +18,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.aplikasiprojeksmt4.R;
 import com.aplikasiprojeksmt4.adapters.ProgramDonaturAdapter;
+import com.aplikasiprojeksmt4.adapters.WithdrawalAdapter;
 import com.aplikasiprojeksmt4.databinding.FragmentDetailDonasiMitraBinding;
 import com.aplikasiprojeksmt4.models.DonaturDana;
 import com.aplikasiprojeksmt4.models.Program;
+import com.aplikasiprojeksmt4.models.Withdrawal;
 import com.bumptech.glide.Glide;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
@@ -39,9 +41,13 @@ public class DetailDonasiMitraFragment extends Fragment {
     private FragmentDetailDonasiMitraBinding binding;
     private Program program;
     private FirebaseFirestore db;
-    private ProgramDonaturAdapter adapter;
+    private ProgramDonaturAdapter donaturAdapter;
+    private WithdrawalAdapter withdrawalAdapter;
     private List<DonaturDana> donaturList = new ArrayList<>();
+    private List<Withdrawal> withdrawalList = new ArrayList<>();
     private ListenerRegistration programListener;
+    private ListenerRegistration donaturListener;
+    private ListenerRegistration withdrawalListener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,11 +72,12 @@ public class DetailDonasiMitraFragment extends Fragment {
         if (program != null) {
             listenToProgramUpdates();
             loadDonaturList();
+            loadWithdrawalHistory();
         }
 
         binding.btnBackDetail.setOnClickListener(v -> Navigation.findNavController(v).navigateUp());
 
-        setupDonaturRecyclerView();
+        setupRecyclerViews();
         setupTabs();
 
         // Action Buttons
@@ -141,14 +148,20 @@ public class DetailDonasiMitraFragment extends Fragment {
         }
     }
 
-    private void setupDonaturRecyclerView() {
-        adapter = new ProgramDonaturAdapter(donaturList);
+    private void setupRecyclerViews() {
+        // Donatur Adapter
+        donaturAdapter = new ProgramDonaturAdapter(donaturList);
         binding.rvDonaturTab.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.rvDonaturTab.setAdapter(adapter);
+        binding.rvDonaturTab.setAdapter(donaturAdapter);
+
+        // Withdrawal Adapter
+        withdrawalAdapter = new WithdrawalAdapter(withdrawalList);
+        binding.rvRiwayatTarik.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvRiwayatTarik.setAdapter(withdrawalAdapter);
     }
 
     private void loadDonaturList() {
-        db.collection("donatur_dana")
+        donaturListener = db.collection("donatur_dana")
                 .whereEqualTo("programId", program.getId())
                 .orderBy("timestamp", Query.Direction.DESCENDING)
                 .addSnapshotListener((value, error) -> {
@@ -159,7 +172,24 @@ public class DetailDonasiMitraFragment extends Fragment {
                             DonaturDana d = doc.toObject(DonaturDana.class);
                             donaturList.add(d);
                         }
-                        adapter.notifyDataSetChanged();
+                        donaturAdapter.notifyDataSetChanged();
+                    }
+                });
+    }
+
+    private void loadWithdrawalHistory() {
+        withdrawalListener = db.collection("withdrawals")
+                .whereEqualTo("programId", program.getId())
+                .orderBy("timestamp", Query.Direction.DESCENDING)
+                .addSnapshotListener((value, error) -> {
+                    if (error != null) return;
+                    if (value != null) {
+                        withdrawalList.clear();
+                        for (QueryDocumentSnapshot doc : value) {
+                            Withdrawal w = doc.toObject(Withdrawal.class);
+                            withdrawalList.add(w);
+                        }
+                        withdrawalAdapter.notifyDataSetChanged();
                     }
                 });
     }
@@ -174,6 +204,7 @@ public class DetailDonasiMitraFragment extends Fragment {
         }
 
         binding.tvDeskripsiTab.setText(program.getDeskripsi());
+        binding.tvLocationTab.setText(program.getWilayah());
 
         // Tarik Dana Visibility logic
         if ("Dana".equalsIgnoreCase(program.getTipe())) {
@@ -194,7 +225,7 @@ public class DetailDonasiMitraFragment extends Fragment {
         
         if (!"Dana".equalsIgnoreCase(program.getTipe())) {
             binding.tvCurrentAmount.setText(getString(R.string.unit_format, terkumpul, unit));
-            binding.tvTargetAmount.setText(getString(R.string.target_label, terkumpul + " " + unit)); // Need proper string res
+            binding.tvTargetAmount.setText(getString(R.string.target_label, target + " " + unit));
         }
 
         binding.tvDonaturCount.setText(String.valueOf(program.getDonatur_count()));
@@ -256,6 +287,8 @@ public class DetailDonasiMitraFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         if (programListener != null) programListener.remove();
+        if (donaturListener != null) donaturListener.remove();
+        if (withdrawalListener != null) withdrawalListener.remove();
         binding = null;
     }
 }

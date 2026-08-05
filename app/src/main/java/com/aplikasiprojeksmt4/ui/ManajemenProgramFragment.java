@@ -69,6 +69,10 @@ public class ManajemenProgramFragment extends Fragment {
         binding.btnBuatProgram.setOnClickListener(v -> 
             Navigation.findNavController(v).navigate(R.id.action_ManajemenProgramFragment_to_TambahProgramFragment)
         );
+
+        binding.btnBuatProgramSecondary.setOnClickListener(v ->
+            Navigation.findNavController(v).navigate(R.id.action_ManajemenProgramFragment_to_TambahProgramFragment)
+        );
         
         binding.btnTarikDanaMenu.setOnClickListener(v -> 
             Navigation.findNavController(v).navigate(R.id.action_ManajemenProgramFragment_to_TarikDanaFragment)
@@ -139,6 +143,7 @@ public class ManajemenProgramFragment extends Fragment {
                         long totalDana = 0;
                         int totalDonatur = 0;
                         int totalPenerima = 0;
+                        int selesaiCount = 0;
                         
                         for (QueryDocumentSnapshot doc : value) {
                             Program p = doc.toObject(Program.class);
@@ -151,6 +156,8 @@ public class ManajemenProgramFragment extends Fragment {
                                 totalDana += p.getTerkumpul();
                                 totalDonatur += p.getDonatur_count();
                                 totalPenerima += p.getPenerima_count();
+                            } else if ("Selesai".equalsIgnoreCase(p.getStatus())) {
+                                selesaiCount++;
                             }
                         }
                         
@@ -166,6 +173,9 @@ public class ManajemenProgramFragment extends Fragment {
 
                         // Update UI Tab Program
                         semuaProgramAdapter.notifyDataSetChanged();
+                        binding.tvTotalProgram.setText(String.valueOf(allPrograms.size()));
+                        binding.tvTotalAktif.setText(String.valueOf(activePrograms.size()));
+                        binding.tvTotalSelesai.setText(String.valueOf(selesaiCount));
 
                         // Update Stats Header
                         updateStatsUI(totalDana, totalDonatur, totalPenerima);
