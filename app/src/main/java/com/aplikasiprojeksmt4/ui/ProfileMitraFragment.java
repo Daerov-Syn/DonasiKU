@@ -17,12 +17,14 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
 
 public class ProfileMitraFragment extends Fragment {
 
     private FragmentProfileMitraBinding binding;
     private FirebaseAuth auth;
     private FirebaseFirestore db;
+    private ListenerRegistration statsListener;
 
     @Nullable
     @Override
@@ -37,7 +39,34 @@ public class ProfileMitraFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         loadUserProfile();
+        loadMitraStats();
         setupClickListeners();
+    }
+
+    private void loadMitraStats() {
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if (currentUser == null) return;
+
+        statsListener = db.collection("programs")
+                .whereEqualTo("dibuat_oleh", currentUser.getUid())
+                .addSnapshotListener((value, error) -> {
+                    if (isAdded() && value != null) {
+                        int totalProgram = value.size();
+                        long totalDonatur = 0;
+                        long totalPenerima = 0;
+
+                        for (com.google.firebase.firestore.QueryDocumentSnapshot doc : value) {
+                            Long donatur = doc.getLong("donatur_count");
+                            Long penerima = doc.getLong("penerima_count");
+                            if (donatur != null) totalDonatur += donatur;
+                            if (penerima != null) totalPenerima += penerima;
+                        }
+
+                        binding.tvStatProgram.setText(String.valueOf(totalProgram));
+                        binding.tvStatDonatur.setText(String.valueOf(totalDonatur));
+                        binding.tvStatPenerima.setText(String.valueOf(totalPenerima));
+                    }
+                });
     }
 
     private void loadUserProfile() {
@@ -119,6 +148,9 @@ public class ProfileMitraFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        if (statsListener != null) {
+            statsListener.remove();
+        }
         binding = null;
     }
 }
