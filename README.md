@@ -1,15 +1,14 @@
 <div align="center">
 
 <!-- Animated Banner -->
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,20,24&height=200&section=header&text=AplikasiMobile%20SMT4&fontSize=52&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Proyek%20Akhir%20Pemrograman%20Mobile%20Semester%204&descAlignY=60&descAlign=50" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,20,24&height=220&section=header&text=DonasiKU&fontSize=65&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Platform%20Donasi%20Pintar%20Berbasis%20Zero%20Waste&descAlignY=65&descAlign=50" width="100%"/>
 
 <!-- Badges -->
 <p>
   <img src="https://img.shields.io/badge/Platform-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white"/>
   <img src="https://img.shields.io/badge/Language-Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Database-Firestore-FFCA28?style=for-the-badge&logo=firebase&logoColor=black"/>
   <img src="https://img.shields.io/badge/Build-Gradle-02303A?style=for-the-badge&logo=gradle&logoColor=white"/>
-  <img src="https://img.shields.io/badge/IDE-Android%20Studio-3DDC84?style=for-the-badge&logo=androidstudio&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Semester-4-orange?style=for-the-badge"/>
 </p>
 
 <p>
@@ -18,172 +17,77 @@
   <img src="https://img.shields.io/github/languages/top/XfindZ-pro/AplikasiMobile_smt4?style=for-the-badge&color=ED8B00"/>
 </p>
 
-<!-- Action Buttons -->
-<p>
-  <a href="https://github.com/XfindZ-pro/AplikasiMobile_smt4/archive/refs/heads/main.zip">
-    <img src="https://img.shields.io/badge/⬇️%20Download%20ZIP-2ea44f?style=for-the-badge"/>
-  </a>
-  <a href="https://github.com/XfindZ-pro/AplikasiMobile_smt4/releases">
-    <img src="https://img.shields.io/badge/📦%20Download%20APK-3DDC84?style=for-the-badge"/>
-  </a>
-  <a href="https://github.com/XfindZ-pro/AplikasiMobile_smt4/issues/new">
-    <img src="https://img.shields.io/badge/🐛%20Laporkan%20Bug-red?style=for-the-badge"/>
-  </a>
-  <a href="https://github.com/XfindZ-pro/AplikasiMobile_smt4/fork">
-    <img src="https://img.shields.io/badge/🍴%20Fork%20Repo-blueviolet?style=for-the-badge"/>
-  </a>
-</p>
-
 </div>
 
 ---
 
-## 📖 Tentang Proyek
+## 📖 Tentang DonasiKU
 
-**AplikasiMobile SMT4** adalah aplikasi Android native yang dikembangkan sebagai **Proyek Akhir Pemrograman Mobile Semester 4**. Aplikasi ini dibangun menggunakan **Java** sebagai bahasa pemrograman utama dan **Gradle Kotlin DSL** sebagai sistem build, dengan struktur project standar Android Studio.
+**DonasiKU** adalah aplikasi Android Native yang dirancang untuk menjembatani donatur dengan panti asuhan, yayasan, dan mitra sosial lainnya. Berbeda dengan platform donasi biasa, DonasiKU mengusung visi **"Zero Waste"** dan mendukung **"Gerakan Zero Water & Re-use"** dengan memfasilitasi donasi barang layak pakai yang diintegrasikan dengan sistem logistik penjemputan.
 
-> 📱 Proyek ini merupakan implementasi nyata dari konsep pengembangan aplikasi mobile Android menggunakan pendekatan native dengan Java dan komponen AndroidX.
-
----
-
-## ✨ Fitur Utama
-
-| Fitur | Deskripsi |
-|-------|-----------|
-| ☕ **Java Native** | Dibangun murni menggunakan Java untuk Android |
-| 🏗️ **Gradle KTS** | Menggunakan Kotlin DSL untuk konfigurasi build yang modern |
-| 📦 **AndroidX** | Memanfaatkan library AndroidX terbaru |
-| ⚡ **Optimized Build** | JVM args dikonfigurasi dengan Xmx2048m untuk build yang cepat |
-| 🔒 **Non-Transitive R Class** | Menggunakan `nonTransitiveRClass` untuk performa build lebih baik |
+> 🌟 **Visi Utama**: Mengubah barang tak terpakai menjadi kebermanfaatan sekaligus menyelamatkan lingkungan dari penumpukan sampah.
 
 ---
 
-## 🗂️ Struktur Proyek
+## ✨ Fitur Unggulan
 
-```
-AplikasiMobile_smt4/
-│
-├── 📁 .idea/                  # Konfigurasi Android Studio / IntelliJ
-├── 📁 app/                    # Modul aplikasi utama
-│   ├── 📁 src/
-│   │   ├── 📁 main/
-│   │   │   ├── 📁 java/       # Source code Java
-│   │   │   ├── 📁 res/        # Resource (layout, drawable, strings)
-│   │   │   └── 📄 AndroidManifest.xml
-│   │   └── 📁 test/           # Unit test
-├── 📁 gradle/                 # Gradle wrapper & version catalog
-│   └── 📁 wrapper/
-├── 📄 build.gradle.kts        # Build script root project
-├── 📄 settings.gradle.kts     # Konfigurasi project & repository
-├── 📄 gradle.properties       # Properti Gradle (JVM, AndroidX)
-├── 📄 gradlew                 # Gradle wrapper (Linux/Mac)
-├── 📄 gradlew.bat             # Gradle wrapper (Windows)
-└── 📄 .gitignore              # File yang dikecualikan dari Git
-```
+### 1. 🧠 Smart Matching Algorithm
+Sistem cerdas yang secara otomatis merekomendasikan program donasi paling mendesak kepada pengguna. Prioritas dihitung berdasarkan persentase sisa target (Dana/Barang) untuk memastikan bantuan tersalurkan secara merata.
+
+### 2. 📊 Real-Time Dashboard & Statistics
+*   **Donatur Stats**: Pantau dampak nyata Anda (Total sampah tercegah dalam kg, jumlah penerima terbantu).
+*   **Global Impact**: Statistik transparansi publik yang diperbarui secara langsung dari Firestore.
+*   **Mitra Management**: Dashboard khusus mitra untuk mengelola kampanye, melacak progres, dan melihat laporan keuangan.
+
+### 3. 📦 Integrated Logistics (Item Donation)
+*   **Drop Point System**: Pilih lokasi penyaluran terdekat melalui integrasi Google Maps.
+*   **Status Tracking**: Pantau alur barang Anda mulai dari *Permintaan Diterima* -> *Menunggu Kurir* -> *Verifikasi Admin* -> *Tersalurkan*.
+
+### 4. 💰 Financial Transparency
+*   **Rencana Penggunaan**: Detail alokasi dana yang transparan untuk setiap program.
+*   **Withdrawal History**: Laporan penarikan dana oleh mitra yang dapat dipantau oleh admin untuk mencegah penyalahgunaan.
 
 ---
 
-## 🛠️ Teknologi yang Digunakan
+## 🛠️ Arsitektur & Teknologi
 
-<p>
-  <img src="https://img.shields.io/badge/Java-ED8B00?style=flat-square&logo=openjdk&logoColor=white" height="28"/>
-  <img src="https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white" height="28"/>
-  <img src="https://img.shields.io/badge/Gradle-02303A?style=flat-square&logo=gradle&logoColor=white" height="28"/>
-  <img src="https://img.shields.io/badge/AndroidX-4285F4?style=flat-square&logo=google&logoColor=white" height="28"/>
-  <img src="https://img.shields.io/badge/Android%20Studio-3DDC84?style=flat-square&logo=androidstudio&logoColor=white" height="28"/>
-  <img src="https://img.shields.io/badge/XML-FF6600?style=flat-square&logo=xml&logoColor=white" height="28"/>
-</p>
+| Komponen | Teknologi |
+|----------|-----------|
+| **Programming Language** | Java (Native Android) |
+| **User Interface** | XML (Modern Material Components, Figma-to-Code) |
+| **Backend / Database** | Google Firebase (Firestore, Authentication, Storage) |
+| **Maps & Location** | Google Maps SDK & Play Services Location |
+| **Image Loading** | Bumptech Glide |
+| **Navigation** | Jetpack Navigation Component |
 
 ---
 
 ## 🚀 Cara Menjalankan
 
 ### Prasyarat
-
-Pastikan sudah terinstall:
-
-- [Android Studio](https://developer.android.com/studio) (versi terbaru)
-- JDK **11** atau lebih baru
-- Android SDK (API Level **21+** direkomendasikan)
-- Emulator Android atau perangkat fisik Android
+- Android Studio (Versi Ladybug direkomendasikan)
+- Akun Firebase (dengan file `google-services.json` yang dikonfigurasi)
+- API Key Google Maps
 
 ### Langkah Instalasi
-
-**1. Clone repositori ini**
-```bash
-git clone https://github.com/XfindZ-pro/AplikasiMobile_smt4.git
-```
-
-**2. Buka di Android Studio**
-```
-File → Open → Pilih folder AplikasiMobile_smt4
-```
-
-**3. Sync Gradle**
-
-Tunggu Android Studio menyelesaikan Gradle sync secara otomatis. Jika tidak otomatis:
-```
-File → Sync Project with Gradle Files
-```
-
-**4. Jalankan Aplikasi**
-
-Pilih emulator atau sambungkan perangkat fisik, lalu klik tombol **▶ Run** atau tekan:
-```
-Shift + F10
-```
-
-### Build APK Manual
-
-```bash
-# Debug APK
-./gradlew assembleDebug
-
-# Release APK
-./gradlew assembleRelease
-```
-
-APK akan tersedia di:
-```
-app/build/outputs/apk/debug/app-debug.apk
-```
+1. **Clone repositori**
+   ```bash
+   git clone https://github.com/XfindZ-pro/AplikasiMobile_smt4.git
+   ```
+2. **Setup Firebase**
+   Letakkan file `google-services.json` Anda di dalam folder `/app`.
+3. **Build Project**
+   Buka folder di Android Studio, tunggu Gradle sync selesai.
+4. **Run**
+   Hubungkan perangkat Android atau gunakan emulator, lalu tekan `Shift + F10`.
 
 ---
 
-## ⚙️ Konfigurasi Gradle
+## 📸 Tampilan Aplikasi
 
-Project ini menggunakan konfigurasi Gradle yang dioptimalkan:
-
-```properties
-# gradle.properties
-org.gradle.jvmargs=-Xmx2048m -Dfile.encoding=UTF-8
-android.useAndroidX=true
-android.nonTransitiveRClass=true
-```
-
----
-
-## 📸 Screenshot
-
-> *Tambahkan screenshot tampilan aplikasi di sini*
-
-```
-screenshots/
-├── splash_screen.png
-├── home_screen.png
-└── detail_screen.png
-```
-
----
-
-## 📋 Persyaratan Sistem
-
-| Komponen | Minimum | Direkomendasikan |
-|----------|---------|-----------------|
-| Android SDK | API 21 (Android 5.0) | API 33+ |
-| JDK | 11 | 17 |
-| RAM Build | 2 GB | 4 GB+ |
-| Android Studio | Iguana | Ladybug / terbaru |
+| Home & Stats | Smart Matching | Program Detail |
+|--------------|----------------|----------------|
+| ![Home](https://via.placeholder.com/200x400?text=Home+Stats) | ![Matching](https://via.placeholder.com/200x400?text=Smart+Matching) | ![Detail](https://via.placeholder.com/200x400?text=Program+Detail) |
 
 ---
 
@@ -196,23 +100,17 @@ screenshots/
         <img src="https://github.com/XfindZ-pro.png" width="80" style="border-radius:50%"/><br/>
         <sub><b>XfindZ-pro</b></sub>
       </a><br/>
-      <img src="https://img.shields.io/badge/👑%20Developer%20Utama-3DDC84?style=flat-square"/>
+      <img src="https://img.shields.io/badge/👑%20Lead%20Developer-3DDC84?style=flat-square"/>
     </td>
     <td align="center">
       <a href="https://github.com/Daerov-Syn">
         <img src="https://github.com/Daerov-Syn.png" width="80" style="border-radius:50%"/><br/>
         <sub><b>daerov</b></sub>
       </a><br/>
-      <img src="https://img.shields.io/badge/🛠️%20Developer-ED8B00?style=flat-square"/>
+      <img src="https://img.shields.io/badge/🛠️%20Contributor-ED8B00?style=flat-square"/>
     </td>
   </tr>
 </table>
-
----
-
-## 📄 Lisensi
-
-Proyek ini dibuat untuk keperluan **akademik** — Tugas Proyek Akhir Pemrograman Mobile Semester 4.
 
 ---
 
@@ -220,14 +118,10 @@ Proyek ini dibuat untuk keperluan **akademik** — Tugas Proyek Akhir Pemrograma
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,20,24&height=100&section=footer" width="100%"/>
 
-<p>
-  <img src="https://komarev.com/ghpvc/?username=XfindZ-pro&label=Profile%20Views&color=3DDC84&style=flat-square"/>
-</p>
-
-**⭐ Jangan lupa kasih star kalau proyek ini membantu!**
+**⭐ Dukung proyek ini dengan memberikan Star!**
 
 <br/>
 
-Made with ❤️ using Java & Android Studio
+Made with ❤️ for a Better World
 
 </div>
